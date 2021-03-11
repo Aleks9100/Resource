@@ -1,0 +1,53 @@
+﻿<Window x:Class="Access_Resource.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Access_Resource"
+        mc:Ignorable="d"
+        Title="Заявки" Height="450" Width="800">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="Foreground" Value="#1E90FF"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="150"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <Menu Grid.Column="0" Grid.Row="0">
+            <MenuItem Header="Таблицы">
+                <MenuItem Header="Тип"/>
+                <MenuItem Header="Оператор"/>
+                <MenuItem Header="Сотрудник"/>
+                <MenuItem Header="Должность"/>
+                <MenuItem Header="Ресурс"/>
+                <MenuItem Header="Тип ресурса"/>
+            </MenuItem>
+        </Menu>
+        <DataGrid Grid.Column="0" Grid.Row="1" SelectedValuePath="ResourceTicketID">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Название ресурса" Width="*" Binding="{Binding Path=Resource.Title}"/>
+                <DataGridTextColumn Header="Тип доступа" Width="*" Binding="{Binding Path=AccessType.Title}"/>
+                <DataGridTextColumn Header="Фамилия сотрудника" Width="*" Binding="{Binding Path=People.LastName}"/>
+                <DataGridTextColumn Header="Дата заявки" Width="*" Binding="{Binding Path=Date}"/>
+                <DataGridCheckBoxColumn Header="Выполнена" Width="*" Binding="{Binding Path=Perfmode}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <StackPanel Grid.Column="0" Grid.Row="2" Orientation="Horizontal">
+        <Button Content="Добавить" />
+        <Button Content="Редактировать" />
+        <Button Content="Удаление"/>
+        </StackPanel>
+    </Grid>
+</Window>
