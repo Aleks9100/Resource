@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 namespace ResourceTable.Table
 {
-    //Должность занимаемые персоналом
-    class Position
+    class Organization
     {
-        public int PositionID { get; set; }
+        public int OrganizationID { get; set; }
         public string Title { get; set; }
-       
+
         public virtual List<People> Peoples { get; set; }
     }
 }

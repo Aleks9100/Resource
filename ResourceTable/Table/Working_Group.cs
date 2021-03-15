@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace ResourceTable.Table
 {
-    //Типы доступа к ресурсам   
-    class AccessType
+    class Working_Group
     {
-        public int AccessTypeID { get; set; }
+        public int Working_GroupID{get;set;}
         public string Title { get; set; }
 
+        public virtual List<Computer> Computers { get; set; }
     }
 }
