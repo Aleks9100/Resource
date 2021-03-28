@@ -10,6 +10,7 @@ namespace ResourceTable.Table
     class Computer
     {
         public int ComputerID { get; set; }
+        public string Indificator { get; set; }
         public string IP { get; set; }
         public string Description { get; set; }
         public string Name { get; set; }

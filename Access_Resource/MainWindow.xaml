@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Access_Resource"
         mc:Ignorable="d"
-        Title="Заявки" Height="450" Width="800">
+        Title="Компьютер" Height="500" Width="1000">
     <Window.Resources>
         <Style TargetType="Button">
             <Setter Property="Margin" Value="10"/>
@@ -18,7 +18,6 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="150"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
@@ -35,19 +34,35 @@
                 <MenuItem Header="Тип ресурса"/>
             </MenuItem>
         </Menu>
-        <DataGrid Grid.Column="0" Grid.Row="1" SelectedValuePath="ResourceTicketID">
+        <DataGrid x:Name="DGR" Grid.Column="0" Grid.Row="1">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Название ресурса" Width="*" Binding="{Binding Path=Resource.Title}"/>
-                <DataGridTextColumn Header="Тип доступа" Width="*" Binding="{Binding Path=AccessType.Title}"/>
-                <DataGridTextColumn Header="Фамилия сотрудника" Width="*" Binding="{Binding Path=People.LastName}"/>
-                <DataGridTextColumn Header="Дата заявки" Width="*" Binding="{Binding Path=Date}"/>
-                <DataGridCheckBoxColumn Header="Выполнена" Width="*" Binding="{Binding Path=Perfmode}"/>
+                <DataGridTextColumn x:Name="IP" Header="IP адрес" Width="*" Binding="{Binding Path=IP}"/>
+                <DataGridTextColumn Header="Описание" Width="*" Binding="{Binding Path=Description}"/>
+                <DataGridTextColumn Header="Имя компьютера" Width="*" Binding="{Binding Path=Name}"/>
+                <DataGridTextColumn Header="Домен" Width="*" Binding="{Binding Path=Domen}"/>
+                <DataGridTextColumn Header="Рабочая группа" Width="*" Binding="{Binding Path=Working_Group.Title}"/>
+                <DataGridTextColumn Header="Доменная УЗ логин" Width="*" Binding="{Binding Path=Domain_UZ.Login}"/>
+                <DataGridTextColumn Header="Доменная УЗ пароль" Width="*" Binding="{Binding Path=Domain_UZ.Password}"/>
+                <DataGridTextColumn Header="Доменная УЗ статус" Width="*" Binding="{Binding Path=Domain_UZ.Status}"/>
+                <DataGridTextColumn Header="Kerio логин" Width="*" Binding="{Binding Path=Kerio.Login}"/>
+                <DataGridTextColumn Header="Kerio пароль" Width="*" Binding="{Binding Path=Kerio.Password}"/>
+                <DataGridTextColumn Header="Directum логин" Width="*" Binding="{Binding Path=Directum.Login}"/>
+                <DataGridTextColumn Header="Directum пароль" Width="*" Binding="{Binding Path=Directum.Password}"/>
+                <DataGridTextColumn Header="1C_ERP логин" Width="*" Binding="{Binding Path=_1C_ERP.Login}"/>
+                <DataGridTextColumn Header="1C_ERP пароль" Width="*" Binding="{Binding Path=_1C_ERP.Password}"/>
+                <DataGridTextColumn Header="Почта логин" Width="*" Binding="{Binding Path=Mail.Login}"/>
+                <DataGridTextColumn Header="Почта пароль" Width="*" Binding="{Binding Path=Mail.Password}"/>
+                <DataGridTextColumn Header="Truekonff логин" Width="*" Binding="{Binding Path=Truekonff.Login}"/>
+                <DataGridTextColumn Header="Truekonff пароль" Width="*" Binding="{Binding Path=Truekonff.Password}"/>
+                <DataGridTextColumn Header="Cisco_Webex логин" Width="*" Binding="{Binding Path=Cisco_Webex.Login}"/>
+                <DataGridTextColumn Header="Cisco_Webex пароль" Width="*" Binding="{Binding Path=Cisco_Webex.Password}"/>
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Grid.Column="0" Grid.Row="2" Orientation="Horizontal">
         <Button Content="Добавить" />
-        <Button Content="Редактировать" />
+        <Button Content="Редактировать"/>
         <Button Content="Удаление"/>
+        <Button Content="Поиск"/>
         </StackPanel>
     </Grid>
 </Window>

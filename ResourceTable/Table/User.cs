@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace ResourceTable.Table
 {
-    class Department
+    class User
     {
-        public int DepartmentID { get; set; }
-        public string Title { get; set; }
+        public int UserID { get; set; }
+        public string Login { get; set; }
+        public string Password { get; set; }
 
-        public virtual List<People> People { get; set; }
     }
 }

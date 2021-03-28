@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace ResourceTable.Table
 {
-    class Department
+    class Role
     {
-        public int DepartmentID { get; set; }
+        public int RoleID { get; set; }
         public string Title { get; set; }
 
-        public virtual List<People> People { get; set; }
     }
 }

@@ -12,6 +12,6 @@ namespace ResourceTable.Table
         public int PositionID { get; set; }
         public string Title { get; set; }
        
-        public virtual List<People> Peoples { get; set; }
+        public virtual List<People> People { get; set; }
     }
 }

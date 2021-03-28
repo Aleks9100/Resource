@@ -41,6 +41,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Table\Access_Rights.cs" />
+    <Compile Include="Table\Column.cs" />
     <Compile Include="Table\Department.cs" />
     <Compile Include="Table\Logins_Passwords\1C_ERP.cs" />
     <Compile Include="Table\Logins_Passwords\Cisco_Webex.cs" />
@@ -54,6 +56,8 @@
     <Compile Include="Table\People.cs" />
     <Compile Include="Table\Position.cs" />
     <Compile Include="Table\Computer.cs" />
+    <Compile Include="Table\Role.cs" />
+    <Compile Include="Table\User.cs" />
     <Compile Include="Table\Working_Group.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

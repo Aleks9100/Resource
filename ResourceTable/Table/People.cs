@@ -19,6 +19,11 @@ namespace ResourceTable.Table
         public int OrganizationID { get; set; }
         public int DepartmentID { get; set; }
 
+        public string Full_Name()
+        {
+            return $"{LastName} {FirstName[0]} {MiddleName[0]}";
+        } 
+
         public virtual Organization Organization { get; set; }
         public virtual Position Position { get; set; }
         public virtual Department Department { get; set; }

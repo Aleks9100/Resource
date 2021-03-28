@@ -23,6 +23,9 @@ namespace Access_Resource
         public MainWindow()
         {
             InitializeComponent();
+            List<Visibility> visibilities = new List<Visibility>();
+            visibilities.Add(Visibility.Hidden);
+            List<DataGridTextColumn> l = new List<DataGridTextColumn>();
         }
     }
 }
