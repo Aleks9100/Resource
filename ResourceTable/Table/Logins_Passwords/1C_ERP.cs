@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ResourceTable.Table.Logins_Passwords
 {
-    class _1C_ERP
+    public class _1C_ERP
     {
         public int _1C_ERPID { get; set; }
         public string Login { get; set; }

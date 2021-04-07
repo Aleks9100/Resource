@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ResourceTable.Table
 {
-    class Organization
+    public class Organization
     {
         public int OrganizationID { get; set; }
         public string Title { get; set; }

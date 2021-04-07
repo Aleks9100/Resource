@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ResourceTable.Table.Logins_Passwords
 {
-    class Directum
+    public class Directum
     {
         public int DirectumID { get; set; }
         public string Login { get; set; }

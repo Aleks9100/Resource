@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 
 namespace ResourceTable.Table
 {
-    class Resource
+    public class Resource
     {
         public int ResourceID { get; set; }
         public string Title { get; set; }
         public DateTime Date_Start { get; set; }
         public DateTime Date_End { get; set; }
+        public int PeopleID { get; set; }
+        public virtual People People { get; set; }
     }
 }

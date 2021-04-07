@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ResourceTable.Table.Logins_Passwords
 {
-    class Mail
+    public class Mail
     {
         public int MailID { get; set; }
         public string Login { get; set; }

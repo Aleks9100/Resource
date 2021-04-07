@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ResourceTable.Table
 {
-    class Computer
+    public class Computer
     {
         public int ComputerID { get; set; }
         public string Indificator { get; set; }

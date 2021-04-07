@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ResourceTable.Table.Logins_Passwords
 {
-    class Truekonff
+    public class Truekonff
     {
         public int TruekonffID { get; set; }
         public string Login { get; set; }

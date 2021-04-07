@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ResourceTable.Table.Logins_Passwords
 {
-    class Cisco_Webex
+    public class Cisco_Webex
     {
         public int Cisco_WebexID { get; set; }
         public string Login { get; set; }

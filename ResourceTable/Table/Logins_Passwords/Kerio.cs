@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ResourceTable.Table.Logins_Passwords
 {
-    class Kerio
+    public class Kerio
     {
         public int KerioID { get; set; }
         public string Login { get; set; }

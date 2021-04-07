@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace ResourceTable.Table
 {
     //Информация о сотрудниках
-    class People
+    public class People
     {
         public int PeopleID { get; set; }
         public string FirstName { get; set; }
@@ -28,6 +28,7 @@ namespace ResourceTable.Table
         public int KerioID { get; set; }
         public int MailID { get; set; }
         public int TruekonffID { get; set; }
+        public virtual List<Resource> Resources { get; set; }
 
         public string Full_Name()
         {

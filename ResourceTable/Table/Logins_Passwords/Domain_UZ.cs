@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ResourceTable.Table.Logins_Passwords
 {
-    class Domain_UZ
+    public class Domain_UZ
     {
         public int Domain_UZID{ get; set; }
         public string Login { get; set; }

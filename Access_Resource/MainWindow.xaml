@@ -32,6 +32,7 @@
                 <MenuItem Header="Должность"/>
                 <MenuItem Header="Ресурс"/>
                 <MenuItem Header="Тип ресурса"/>
+                <MenuItem Header="Учетные записи"/>
             </MenuItem>
         </Menu>
         <DataGrid x:Name="DGR" Grid.Column="0" Grid.Row="1">
@@ -58,11 +59,11 @@
                 <DataGridTextColumn Header="Cisco_Webex пароль" Width="*" Binding="{Binding Path=Cisco_Webex.Password}"/>
             </DataGrid.Columns>
         </DataGrid>
-        <StackPanel Grid.Column="0" Grid.Row="2" Orientation="Horizontal">
-        <Button Content="Добавить" />
-        <Button Content="Редактировать"/>
-        <Button Content="Удаление"/>
-        <Button Content="Поиск"/>
+        <StackPanel Grid.Column="0" Grid.Row="2" Orientation="Horizontal" Width="auto">
+            <Button Content="Добавить" />
+            <Button Content="Редактировать"/>
+            <Button Content="Удаление"/>
+            <Button Content="Поиск" HorizontalAlignment="Right"/>
         </StackPanel>
     </Grid>
 </Window>
