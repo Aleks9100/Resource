@@ -10,21 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Access_Resource
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для AccountWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class AccountWindow : Window
     {
-        int ID=0;
-        public MainWindow(int id)
+        public AccountWindow()
         {
             InitializeComponent();
-            ID = id;
         }
     }
 }

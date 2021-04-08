@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using ResourceDatabase;
 
 namespace Access_Resource
 {
@@ -36,6 +37,19 @@ namespace Access_Resource
             PB_Password.Password = TB_Password.Text;
             TB_Password.Visibility = Visibility.Hidden;
             PB_Password.Visibility = Visibility.Visible;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            using (var db = new ResourceModel()) 
+            {
+                int id = db.Authorization(TB_Login.Text,PB_Password.Password);
+                if (id != -1)
+                {
+                    (new MainWindow(id)).Show();
+                }
+                else MessageBox.Show("Неверный логин или пароль");
+            }
         }
     }
 }

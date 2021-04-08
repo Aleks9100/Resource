@@ -19,12 +19,12 @@ namespace ResourceDatabase
         public ResourceModel()
             : base("name=ResourceDatabase")
         {
+
         }
 
         #region Tables
         public virtual DbSet<Resource> Resources { get; set; }
         public virtual DbSet<Computer> Computers { get; set; }
-        public virtual DbSet<Access_Rights> Access_Rights { get; set; }
         public virtual DbSet<Department> Departments { get; set; }
         public virtual DbSet<Operator> Operators { get; set; }
         public virtual DbSet<Organization> Organizations { get; set; }
@@ -107,21 +107,6 @@ namespace ResourceDatabase
                 return "Запись успешно добавлена";
             }
             catch (Exception ex) { return ex.Message; }
-        }
-        public string AddAccess_Rights(List<Visibility> titleTable, List<Visibility> titleColumn)
-        {
-            try
-            {
-                Access_Rights.Add(new Access_Rights()
-                {
-                    TitleTable = titleTable,
-                    TitleColumn = titleColumn
-                });
-                SaveChanges();
-                return "Запись успешно добавлена";
-            }
-            catch (Exception ex) { return ex.Message; }
-
         }
         public string AddComputer(string indificator, string iP, string description, string name, string domen, int working_GroupID, int peopleID)
         {
@@ -247,14 +232,15 @@ namespace ResourceDatabase
             }
             catch (Exception ex) { return ex.Message; }
         }
-        public string AddRole(string title, int access_RightsID) 
+        public string AddRole(string title, List<Visibility> titleTable, List<Visibility> titleColumn) 
         {
             try 
             {
                 Roles.Add(new Role()
                 {
                     Title = title,
-                    Access_RightsID = access_RightsID
+                    TitleTable = titleTable,
+                    TitleColumn = titleColumn
                 });
                 SaveChanges();
                 return "Запись успешно добавлена";
@@ -327,20 +313,7 @@ namespace ResourceDatabase
                 return "Запись успешно изменена";
             }
             catch (Exception ex) { return ex.Message; }
-        }
-        public string EditAccess_Rights(int id,List<Visibility> titleTable, List<Visibility> titleColumn)
-        {
-            try
-            {
-                var item = Access_Rights.FirstOrDefault(i => i.Access_RightsID == id);
-                item.TitleTable = titleTable;
-                item.TitleColumn = titleColumn;
-                SaveChanges();
-                   return "Запись успешно изменена";
-            }
-            catch (Exception ex) { return ex.Message; }
-
-        }
+        }      
         public string EditComputer(int id,string indificator, string iP, string description, string name, string domen, int working_GroupID, int peopleID)
         {
             try
@@ -452,13 +425,14 @@ namespace ResourceDatabase
             }
             catch (Exception ex) { return ex.Message; }
         }
-        public string EditRole(int id,string title, int access_RightsID)
+        public string EditRole(int id,string title, List<Visibility> titleTable, List<Visibility> titleColumn)
         {
             try
             {
                 var item = Roles.FirstOrDefault(i=>i.RoleID == id);
                 item.Title = title;
-                item.Access_RightsID = access_RightsID;
+                item.TitleTable = titleTable;
+                item.TitleColumn = titleColumn;
                 SaveChanges();
                    return "Запись успешно изменена";
             }
@@ -520,18 +494,6 @@ namespace ResourceDatabase
                 return "Запись успешно удалена";
             }
             catch (Exception ex) { return ex.Message; }
-        }
-        public string RemoveAccess_Rights(int id)
-        {
-            try
-            {
-                var item = Access_Rights.FirstOrDefault(i => i.Access_RightsID == id);
-                Access_Rights.Remove(item);
-                SaveChanges();
-                return "Запись успешно удалена";
-            }
-            catch (Exception ex) { return ex.Message; }
-
         }
         public string RemoveComputer(int id)
         {
@@ -639,7 +601,6 @@ namespace ResourceDatabase
         #region GetTable
         public List<Resource> GetResource() => Resources.ToList();
         public List<Computer> GetComputer() => Computers.ToList();
-        public List<Access_Rights> GetAccess_Rights() => Access_Rights.ToList();
         public List<Department> GetDepartment() => Departments.ToList();
         public List<Operator> GetOperator() => Operators.ToList();
         public List<Organization> GetOrganization() => Organizations.ToList();
@@ -647,6 +608,27 @@ namespace ResourceDatabase
         public List<Position> GetPosition() => Positions.ToList();
         public List<Role> GetRole() => Roles.ToList();
         public List<Working_Group> GetWorking_Group() => Working_Groups.ToList();
+        #region GetInId
+        public Resource GetResourceInId(int id) => Resources.FirstOrDefault(i=>i.ResourceID == id);
+        public Computer GetComputerInId(int id) => Computers.FirstOrDefault(i => i.ComputerID == id);
+        public Department GetDepartmentInId(int id) => Departments.FirstOrDefault(i => i.DepartmentID == id);
+        public Operator GetOperatorInId(int id) => Operators.FirstOrDefault(i=>i.OperatorID == id);
+        public Organization GetOrganizationInId(int id) => Organizations.FirstOrDefault(i=>i.OrganizationID == id);
+        public People GetPeopleInId(int id) => Peoples.FirstOrDefault(i=>i.PeopleID == id);
+        public Position GetPositionInId(int id) => Positions.FirstOrDefault(i=>i.PositionID == id);
+        public Role GetRoleInId(int id) => Roles.FirstOrDefault(i=>i.RoleID == id);
+        public Working_Group GetWorking_GroupInId(int id) => Working_Groups.FirstOrDefault(i=>i.Working_GroupID == id);
+        #endregion
+
+        public int Authorization(string login, string password) 
+        {
+            var item = Operators.FirstOrDefault(i=>i.Login == login && i.Password == password);
+            if (item != null)
+            {
+                return item.OperatorID;
+            }
+            else return -1;
+        }
         #endregion
     }
 }

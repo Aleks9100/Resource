@@ -53,7 +53,7 @@
                         <TextBlock HorizontalAlignment="Center" Text="Пароль" Grid.Row="2" Grid.Column="0"/>
                         <TextBox Name="TB_Password" Grid.Column ="0" Grid.Row="3"/>
                         <PasswordBox Grid.Column ="0" Grid.Row="3" x:Name="PB_Password"/>
-                        <Button Margin="5,30,5,0"  VerticalAlignment="Bottom" Grid.Column="0" Grid.Row="4" Content="Войти"/>
+                        <Button Margin="5,30,5,0"  VerticalAlignment="Bottom" Grid.Column="0" Grid.Row="4" Content="Войти" Click="Button_Click"/>
                         <CheckBox Grid.Column ="0" Grid.Row="3" Margin="0,0,10,0" HorizontalAlignment="Right" VerticalAlignment="Center" Unchecked="CheckBox_Unchecked" Checked="CheckBox_Checked"/>
                     </Grid>
                 </StackPanel>
