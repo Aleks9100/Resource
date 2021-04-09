@@ -13,6 +13,6 @@ namespace ResourceTable.Table.Logins_Passwords
         public string Password { get; set; }
         public string Status { get; set; }
 
-        public virtual Computer Computer { get; set; }
+        public virtual People People { get; set; }
     }
 }
