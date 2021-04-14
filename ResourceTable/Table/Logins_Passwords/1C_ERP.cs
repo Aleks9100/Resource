@@ -11,7 +11,5 @@ namespace ResourceTable.Table.Logins_Passwords
         public int _1C_ERPID { get; set; }
         public string Login { get; set; }
         public string Password { get; set; }
-
-        public virtual People People { get; set; }
     }
 }
