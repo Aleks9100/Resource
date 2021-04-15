@@ -1,11 +1,11 @@
-﻿<Window x:Class="Access_Resource.MainWindow"
+﻿<Window x:Class="Access_Resource.DepartmentWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Access_Resource"
         mc:Ignorable="d"
-        Title="Компьютер" Height="500" Width="800">
+        Title="DepartmentWindow" Height="450" Width="800">
     <Window.Resources>
         <Style TargetType="Button">
             <Setter Property="Margin" Value="10"/>
@@ -26,7 +26,7 @@
         </Grid.RowDefinitions>
         <Menu Grid.Column="0" Grid.Row="0">
             <MenuItem Header="Таблицы">
-                <MenuItem Header="Отдел"/>
+                <MenuItem Header="Компьютер"/>
                 <MenuItem Header="Оператор"/>
                 <MenuItem Header="Организация"/>
                 <MenuItem Header="Сотрудник"/>
@@ -38,11 +38,7 @@
         </Menu>
         <DataGrid x:Name="DGR" Grid.Column="0" Grid.Row="1">
             <DataGrid.Columns>
-                <DataGridTextColumn x:Name="IP" Header="IP адрес" Width="*" Binding="{Binding Path=IP}"/>
-                <DataGridTextColumn Header="Описание" Width="*" Binding="{Binding Path=Description}"/>
-                <DataGridTextColumn Header="Имя компьютера" Width="*" Binding="{Binding Path=Name}"/>
-                <DataGridTextColumn Header="Домен" Width="*" Binding="{Binding Path=Domen}"/>
-                <DataGridTextColumn Header="Рабочая группа" Width="*" Binding="{Binding Path=Working_Group.Title}"/>
+                <DataGridTextColumn Header="Название отдела" Width="*" Binding="{Binding Path=Title}"/>
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Grid.Column="0" Grid.Row="2" Orientation="Horizontal" Width="auto">
