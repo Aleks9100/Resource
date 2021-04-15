@@ -598,7 +598,7 @@ namespace ResourceDatabase
             catch (Exception ex) { return ex.Message; }
         }
         #endregion
-        #region GetTable
+            #region GetTable
         public List<Resource> GetResource() => Resources.ToList();
         public List<Computer> GetComputer() => Computers.ToList();
         public List<Department> GetDepartment() => Departments.ToList();
