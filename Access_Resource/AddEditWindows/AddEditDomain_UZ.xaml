@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Access_Resource.AddEditWindows"
         mc:Ignorable="d"
-        Title="AddEditDomain_UZ" Height="385" Width="800">
+        Title="AddEditDomain_UZ" Height="385" Width="500">
     <Window.Resources>
         <Style TargetType="Button">
             <Setter Property="Margin" Value="5"/>
@@ -36,13 +36,20 @@
             <Setter Property="Background" Value="White"/>
             <Setter Property="Padding" Value="5"/>
         </Style>
+        <Style TargetType="PasswordBox">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="FontSize" Value="22"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Padding" Value="5"/>
+        </Style>
     </Window.Resources>
     <Grid>
         <StackPanel>
             <TextBlock Text="Логин"/>
             <TextBox x:Name="TB_Login"/>
             <TextBlock Text="Пароль"/>
-            <TextBox x:Name="TB_Password"/>
+            <TextBox x:Name="PB_Password"/>
             <TextBlock Text="Статус"/>
             <TextBox x:Name="TB_Status"/>
             <Button Name="AddEditButton" Content="Добавить учетную запись Domain UZ" Click="Button_Click"/>

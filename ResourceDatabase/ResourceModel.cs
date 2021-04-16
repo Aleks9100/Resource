@@ -598,7 +598,7 @@ namespace ResourceDatabase
             catch (Exception ex) { return ex.Message; }
         }
         #endregion
-            #region GetTable
+        #region GetTable
         public List<Resource> GetResource() => Resources.ToList();
         public List<Computer> GetComputer() => Computers.ToList();
         public List<Department> GetDepartment() => Departments.ToList();
@@ -609,6 +609,13 @@ namespace ResourceDatabase
         public List<Role> GetRole() => Roles.ToList();
         public List<Working_Group> GetWorking_Group() => Working_Groups.ToList();
         #region GetInId
+        public _1C_ERP Get_1C_ERPInId(int id) => _1C_ERPs.FirstOrDefault(i => i._1C_ERPID == id);
+        public Cisco_Webex GetCisco_WebexInId(int id) => Cisco_Webexs.FirstOrDefault(i => i.Cisco_WebexID == id);
+        public Directum GetDirectumInId(int id) => Directums.FirstOrDefault(i => i.DirectumID == id);
+        public Domain_UZ GetDomain_UZInId(int id) => Domain_UZs.FirstOrDefault(i => i.Domain_UZID == id);
+        public Kerio GetKerioInId(int id) => Kerios.FirstOrDefault(i => i.KerioID == id);
+        public Mail GetMailInId(int id) => Mails.FirstOrDefault(i => i.MailID == id);
+        public Truekonff GetTruekonffInId(int id) => Truekonffs.FirstOrDefault(i => i.TruekonffID == id);
         public Resource GetResourceInId(int id) => Resources.FirstOrDefault(i=>i.ResourceID == id);
         public Computer GetComputerInId(int id) => Computers.FirstOrDefault(i => i.ComputerID == id);
         public Department GetDepartmentInId(int id) => Departments.FirstOrDefault(i => i.DepartmentID == id);
@@ -618,7 +625,7 @@ namespace ResourceDatabase
         public Position GetPositionInId(int id) => Positions.FirstOrDefault(i=>i.PositionID == id);
         public Role GetRoleInId(int id) => Roles.FirstOrDefault(i=>i.RoleID == id);
         public Working_Group GetWorking_GroupInId(int id) => Working_Groups.FirstOrDefault(i=>i.Working_GroupID == id);
-        #endregion
+           #endregion
 
         public int Authorization(string login, string password) 
         {

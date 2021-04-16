@@ -61,11 +61,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AddEditWindows\AddEdit1CERP.xaml.cs">
-      <DependentUpon>AddEdit1CERP.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="AddEditWindows\AddEditCiscoWebex.xaml.cs">
-      <DependentUpon>AddEditCiscoWebex.xaml</DependentUpon>
+    <Compile Include="AddEditWindows\AddEditAccount.xaml.cs">
+      <DependentUpon>AddEditAccount.xaml</DependentUpon>
     </Compile>
     <Compile Include="AddEditWindows\AddEditComputer.xaml.cs">
       <DependentUpon>AddEditComputer.xaml</DependentUpon>
@@ -73,17 +70,8 @@
     <Compile Include="AddEditWindows\AddEditDepartment.xaml.cs">
       <DependentUpon>AddEditDepartment.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AddEditWindows\AddEditDirectum.xaml.cs">
-      <DependentUpon>AddEditDirectum.xaml</DependentUpon>
-    </Compile>
     <Compile Include="AddEditWindows\AddEditDomain_UZ.xaml.cs">
       <DependentUpon>AddEditDomain_UZ.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="AddEditWindows\AddEditKerio.xaml.cs">
-      <DependentUpon>AddEditKerio.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="AddEditWindows\AddEditMail.xaml.cs">
-      <DependentUpon>AddEditMail.xaml</DependentUpon>
     </Compile>
     <Compile Include="AddEditWindows\AddEditOperator.xaml.cs">
       <DependentUpon>AddEditOperator.xaml</DependentUpon>
@@ -116,11 +104,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="AddEditWindows\AddEdit1CERP.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="AddEditWindows\AddEditCiscoWebex.xaml">
+    <Page Include="AddEditWindows\AddEditAccount.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -132,19 +116,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="AddEditWindows\AddEditDirectum.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="AddEditWindows\AddEditDomain_UZ.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="AddEditWindows\AddEditKerio.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="AddEditWindows\AddEditMail.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
