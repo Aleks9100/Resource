@@ -1,11 +1,11 @@
-﻿<Window x:Class="Access_Resource.AddEditWindows.AddEditOrganization"
+﻿<Window x:Class="Access_Resource.AddEditWindows.AddEditResource"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Access_Resource.AddEditWindows"
         mc:Ignorable="d"
-        Title="Добавление" Height="190" Width="500" Closed="Window_Closed">
+        Title="AddEditResource" Height="480" Width="800">
     <Window.Resources>
         <Style TargetType="Button">
             <Setter Property="Margin" Value="5"/>
@@ -30,6 +30,14 @@
             <Setter Property="Padding" Value="5"/>
         </Style>
 
+        <Style TargetType="DatePicker">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="FontSize" Value="22"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Padding" Value="5"/>
+        </Style>
+
         <Style TargetType="TextBlock">
             <Setter Property="Margin" Value="5"/>
             <Setter Property="FontSize" Value="22"/>
@@ -39,9 +47,15 @@
     </Window.Resources>
     <Grid>
         <StackPanel>
-            <TextBlock Text="Название"/>
+            <TextBlock Text="Название ресурса"/>
             <TextBox x:Name="TB_Title"/>
-            <Button Name="AddEditButton" Content="Добавить организацию" Click="Button_Click"/>
+            <TextBlock Text="Дата доступа"/>
+            <DatePicker x:Name="TB_DateStart"/>
+            <TextBlock Text="Дата блокировки"/>
+            <DatePicker x:Name="TB_DateEnd"/>
+            <TextBlock Text="Сотрудник"/>
+            <ComboBox x:Name="TB_People"/>
+            <Button Name="AddEditButton" Content="Добавить ресурс" Click="Button_Click"/>
         </StackPanel>
     </Grid>
 </Window>

@@ -61,6 +61,51 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddEditWindows\AddEdit1CERP.xaml.cs">
+      <DependentUpon>AddEdit1CERP.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddEditWindows\AddEditCiscoWebex.xaml.cs">
+      <DependentUpon>AddEditCiscoWebex.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddEditWindows\AddEditComputer.xaml.cs">
+      <DependentUpon>AddEditComputer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddEditWindows\AddEditDepartment.xaml.cs">
+      <DependentUpon>AddEditDepartment.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddEditWindows\AddEditDirectum.xaml.cs">
+      <DependentUpon>AddEditDirectum.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddEditWindows\AddEditDomain_UZ.xaml.cs">
+      <DependentUpon>AddEditDomain_UZ.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddEditWindows\AddEditKerio.xaml.cs">
+      <DependentUpon>AddEditKerio.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddEditWindows\AddEditMail.xaml.cs">
+      <DependentUpon>AddEditMail.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddEditWindows\AddEditOperator.xaml.cs">
+      <DependentUpon>AddEditOperator.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddEditWindows\AddEditPeople.xaml.cs">
+      <DependentUpon>AddEditPeople.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddEditWindows\AddEditPosition.xaml.cs">
+      <DependentUpon>AddEditPosition.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddEditWindows\AddEditResource.xaml.cs">
+      <DependentUpon>AddEditResource.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddEditWindows\AddEditRole.xaml.cs">
+      <DependentUpon>AddEditRole.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddEditWindows\AddEditTruekonff.xaml.cs">
+      <DependentUpon>AddEditTruekonff.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddEditWindows\AddEditWorkingGroup.xaml.cs">
+      <DependentUpon>AddEditWorkingGroup.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ResourceWindow.xaml.cs">
       <DependentUpon>ResourceWindow.xaml</DependentUpon>
     </Compile>
@@ -71,7 +116,67 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="AddEditWindows\AddEdit1CERP.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddEditWindows\AddEditCiscoWebex.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddEditWindows\AddEditComputer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddEditWindows\AddEditDepartment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddEditWindows\AddEditDirectum.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddEditWindows\AddEditDomain_UZ.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddEditWindows\AddEditKerio.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddEditWindows\AddEditMail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddEditWindows\AddEditOperator.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="AddEditWindows\AddEditOrganization.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddEditWindows\AddEditPeople.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddEditWindows\AddEditPosition.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddEditWindows\AddEditResource.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddEditWindows\AddEditRole.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddEditWindows\AddEditTruekonff.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddEditWindows\AddEditWorkingGroup.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
