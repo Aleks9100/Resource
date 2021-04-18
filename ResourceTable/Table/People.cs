@@ -38,12 +38,7 @@ namespace ResourceTable.Table
         public virtual Organization Organization { get; set; }
         public virtual Position Position { get; set; }
         public virtual Department Department { get; set; }
-        public virtual _1C_ERP _1C_ERP { get; set; }
-        public virtual Cisco_Webex Cisco_Webex { get; set; }
-        public virtual Directum Directum { get; set; }
+        public virtual List<Account> Accounts { get; set; }
         public virtual Domain_UZ Domain_UZ { get; set; }
-        public virtual Kerio Kerio { get; set; }
-        public virtual Mail Mail { get; set; }
-        public virtual Truekonff Truekonff { get; set; }
     }
 }

@@ -32,77 +32,24 @@ namespace ResourceDatabase
         public virtual DbSet<Position> Positions { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<Working_Group> Working_Groups { get; set; }
+        public virtual DbSet<Type_Account> Type_Accounts { get; set; }
 
-        public virtual DbSet<_1C_ERP> _1C_ERPs { get; set; }
-        public virtual DbSet<Cisco_Webex> Cisco_Webexs { get; set; }
-        public virtual DbSet<Directum> Directums { get; set; }
+        public virtual DbSet<Account> Accounts { get; set; }
         public virtual DbSet<Domain_UZ> Domain_UZs { get; set; }
-        public virtual DbSet<Kerio> Kerios { get; set; }
-        public virtual DbSet<Mail> Mails { get; set; }
-        public virtual DbSet<Truekonff> Truekonffs { get; set; }
         #endregion
         #region AddTable
-        public string AddAccount(string login, string password, string title, string status)
+        public string AddAccount(string login, string password, int titleID, int accountID, int peopleID)
         {
             try
-            {
-                if (title == "1C_ERP")
-                {
-                    _1C_ERPs.Add(new _1C_ERP()
-                    {
-                        Login = login,
-                        Password = password
-                    });
-                }
-                else if (title == "Cisco")
-                {
-                    Cisco_Webexs.Add(new Cisco_Webex()
-                    {
-                        Login = login,
-                        Password = password
-                    });
-                }
-                else if (title == "Directum")
-                {
-                    Directums.Add(new Directum()
-                    {
-                        Login = login,
-                        Password = password
-                    });
-                }
-                else if (title == "Domain")
-                {
-                    Domain_UZs.Add(new Domain_UZ()
+            {               
+                      Accounts.Add(new Account()
                     {
                         Login = login,
                         Password = password,
-                        Status=status
+                        AccountID = accountID,
+                        PeopleID= peopleID,
+                        Type_AccountID = titleID
                     });
-                }
-                else if (title == "Kerio")
-                {
-                    Kerios.Add(new Kerio()
-                    {
-                        Login = login,
-                        Password = password
-                    });
-                }
-                else if (title == "Mail")
-                {
-                    Mails.Add(new Mail()
-                    {
-                        Login = login,
-                        Password = password
-                    });
-                }
-                else if (title == "Truekonff")
-                {
-                    Truekonffs.Add(new Truekonff()
-                    {
-                        Login = login,
-                        Password = password
-                    });
-                }
                 SaveChanges();
                 return "Запись успешно добавлена";
             }
@@ -262,58 +209,17 @@ namespace ResourceDatabase
         }
         #endregion
         #region EditTable
-        public string EditAccount(int id,string login, string password, string title,string status)
-        {
-            try
-            {
-                if (title == "1C_ERP")
-                {
-                    var item = _1C_ERPs.FirstOrDefault(i=>i._1C_ERPID == id);
-                    item.Login = login;
-                    item.Password = password;
-                }
-                else if (title == "Cisco")
-                {
-                    var item = Cisco_Webexs.FirstOrDefault(i => i.Cisco_WebexID == id);
-                    item.Login = login;
-                    item.Password = password;
-                }
-                else if (title == "Directum")
-                {
-                    var item = Directums.FirstOrDefault(i => i.DirectumID == id);
-                    item.Login = login;
-                    item.Password = password;
-                }
-                else if (title == "Domain")
-                {
-                    var item = Domain_UZs.FirstOrDefault(i => i.Domain_UZID == id);
-                    item.Login = login;
-                    item.Password = password;
-                    item.Status = status;
-                }
-                else if (title == "Kerio")
-                {
-                    var item = Kerios.FirstOrDefault(i => i.KerioID == id);
-                    item.Login = login;
-                    item.Password = password;
-                }
-                else if (title == "Mail")
-                {
-                    var item = Mails.FirstOrDefault(i => i.MailID == id);
-                    item.Login = login;
-                    item.Password = password;
-                }
-                else if (title == "Truekonff")
-                {
-                    var item = Truekonffs.FirstOrDefault(i => i.TruekonffID == id);
-                    item.Login = login;
-                    item.Password = password;
-                }
-                SaveChanges();
-                return "Запись успешно изменена";
-            }
-            catch (Exception ex) { return ex.Message; }
-        }      
+        //Додеписать метод
+
+        //public string EditAccount(int id,string login, string password, string title,string status)
+        //{
+        //    try
+        //    {             
+        //        SaveChanges();
+        //        return "Запись успешно изменена";
+        //    }
+        //    catch (Exception ex) { return ex.Message; }
+        //}      
         public string EditComputer(int id,string indificator, string iP, string description, string name, string domen, int working_GroupID, int peopleID)
         {
             try
@@ -451,45 +357,12 @@ namespace ResourceDatabase
         }
         #endregion
         #region RemoveTable
-        public string RemoveAccount(int id,string title)
+        public string RemoveAccount(int id)
         {
             try
             {
-                if (title == "1C_ERP")
-                {
-                    var item = _1C_ERPs.FirstOrDefault(i => i._1C_ERPID == id);
-                    _1C_ERPs.Remove(item);
-                }
-                else if (title == "Cisco")
-                {
-                    var item = Cisco_Webexs.FirstOrDefault(i => i.Cisco_WebexID == id);
-                    Cisco_Webexs.Remove(item);
-                }
-                else if (title == "Directum")
-                {
-                    var item = Directums.FirstOrDefault(i => i.DirectumID == id);
-                    Directums.Remove(item);
-                }
-                else if (title == "Domain")
-                {
-                    var item = Domain_UZs.FirstOrDefault(i => i.Domain_UZID == id);
-                    Domain_UZs.Remove(item);
-                }
-                else if (title == "Kerio")
-                {
-                    var item = Kerios.FirstOrDefault(i => i.KerioID == id);
-                    Kerios.Remove(item);
-                }
-                else if (title == "Mail")
-                {
-                    var item = Mails.FirstOrDefault(i => i.MailID == id);
-                    Mails.Remove(item);
-                }
-                else if (title == "Truekonff")
-                {
-                    var item = Truekonffs.FirstOrDefault(i => i.TruekonffID == id);
-                    Truekonffs.Remove(item);
-                }
+                var item = Accounts.FirstOrDefault(i => i.AccountID == id);
+                Accounts.Remove(item);
                 SaveChanges();
                 return "Запись успешно удалена";
             }
@@ -608,14 +481,9 @@ namespace ResourceDatabase
         public List<Position> GetPosition() => Positions.ToList();
         public List<Role> GetRole() => Roles.ToList();
         public List<Working_Group> GetWorking_Group() => Working_Groups.ToList();
-        #region GetInId
-        public _1C_ERP Get_1C_ERPInId(int id) => _1C_ERPs.FirstOrDefault(i => i._1C_ERPID == id);
-        public Cisco_Webex GetCisco_WebexInId(int id) => Cisco_Webexs.FirstOrDefault(i => i.Cisco_WebexID == id);
-        public Directum GetDirectumInId(int id) => Directums.FirstOrDefault(i => i.DirectumID == id);
+        #region GetInId       
         public Domain_UZ GetDomain_UZInId(int id) => Domain_UZs.FirstOrDefault(i => i.Domain_UZID == id);
-        public Kerio GetKerioInId(int id) => Kerios.FirstOrDefault(i => i.KerioID == id);
-        public Mail GetMailInId(int id) => Mails.FirstOrDefault(i => i.MailID == id);
-        public Truekonff GetTruekonffInId(int id) => Truekonffs.FirstOrDefault(i => i.TruekonffID == id);
+        public Account GetKerioInId(int id) => Accounts.FirstOrDefault(i => i.AccountID == id);    
         public Resource GetResourceInId(int id) => Resources.FirstOrDefault(i=>i.ResourceID == id);
         public Computer GetComputerInId(int id) => Computers.FirstOrDefault(i => i.ComputerID == id);
         public Department GetDepartmentInId(int id) => Departments.FirstOrDefault(i => i.DepartmentID == id);

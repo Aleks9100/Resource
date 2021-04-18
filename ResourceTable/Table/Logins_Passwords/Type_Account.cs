@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace ResourceTable.Table.Logins_Passwords
 {
-    public class Truekonff
+    public class Type_Account
     {
-        public int TruekonffID { get; set; }
-        public string Login { get; set; }
-        public string Password { get; set; }
+        public int Type_AccountID { get; set; }
+        public string Title { get; set; }
+        public virtual List<Account> Accounts { get; set; }
+
     }
 }

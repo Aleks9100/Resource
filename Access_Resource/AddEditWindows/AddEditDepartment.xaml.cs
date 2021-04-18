@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ResourceDatabase;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,40 @@ namespace Access_Resource.AddEditWindows
     /// </summary>
     public partial class AddEditDepartment : Window
     {
-        public AddEditDepartment()
+        DepartmentWindow DepartmentWindow;
+        int ID = -1;
+        public AddEditDepartment(DepartmentWindow departmentWindow)
         {
             InitializeComponent();
+            DepartmentWindow = departmentWindow;       
+        }
+        public AddEditDepartment(DepartmentWindow departmentWindow, int id)
+        {
+            InitializeComponent();
+            DepartmentWindow = departmentWindow;
+            ID = id;
+            Title = "Редактирование отдела";
+            AddEditButton.Content = "Редактировать отдел";
+
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            using (var db = new ResourceModel())
+            {
+                if (ID == -1)
+                {
+                    MessageBox.Show(db.AddDepartmentOrOrganization(TB_Title.Text, "Department"));
+                    DepartmentWindow.IsEnabled = true;
+                    Close();
+                }
+                else
+                {
+                    MessageBox.Show(db.EditDepartmentOrOrganization(ID,TB_Title.Text, "Department"));
+                    DepartmentWindow.IsEnabled = true;
+                    Close();
+                }
+            }
         }
     }
 }

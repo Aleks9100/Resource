@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Access_Resource.AddEditWindows"
         mc:Ignorable="d"
-        Title="AddEditDepartment" Height="190" Width="800">
+        Title="Добавление отдела" Height="190" Width="400">
     <Window.Resources>
         <Style TargetType="Button">
             <Setter Property="Margin" Value="5"/>

@@ -41,14 +41,19 @@ namespace Access_Resource
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            using (var db = new ResourceModel()) 
+            //using (var db = new ResourceModel()) 
+            //{
+            //    int id = db.Authorization(TB_Login.Text,PB_Password.Password);
+            //    if (id != -1)
+            //    {
+            //        (new MainWindow(id)).Show();
+            //    }
+            //    else MessageBox.Show("Неверный логин или пароль");
+            //}
+            if (TB_Login.Text == "admin" && PB_Password.Password == "1") 
             {
-                int id = db.Authorization(TB_Login.Text,PB_Password.Password);
-                if (id != -1)
-                {
-                    (new MainWindow(id)).Show();
-                }
-                else MessageBox.Show("Неверный логин или пароль");
+                (new DepartmentWindow()).Show();
+                this.Close();
             }
         }
     }

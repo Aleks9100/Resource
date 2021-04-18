@@ -42,16 +42,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Table\Logins_Passwords\Account.cs" />
+    <Compile Include="Table\Logins_Passwords\Type_Account.cs" />
     <Compile Include="Table\Resource.cs" />
     <Compile Include="Table\Column.cs" />
     <Compile Include="Table\Department.cs" />
-    <Compile Include="Table\Logins_Passwords\1C_ERP.cs" />
-    <Compile Include="Table\Logins_Passwords\Cisco_Webex.cs" />
-    <Compile Include="Table\Logins_Passwords\Directum.cs" />
     <Compile Include="Table\Logins_Passwords\Domain_UZ.cs" />
-    <Compile Include="Table\Logins_Passwords\Kerio.cs" />
-    <Compile Include="Table\Logins_Passwords\Mail.cs" />
-    <Compile Include="Table\Logins_Passwords\Truekonff.cs" />
     <Compile Include="Table\Operator.cs" />
     <Compile Include="Table\Organization.cs" />
     <Compile Include="Table\People.cs" />

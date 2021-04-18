@@ -94,13 +94,13 @@
     <Compile Include="AddEditWindows\AddEditWorkingGroup.xaml.cs">
       <DependentUpon>AddEditWorkingGroup.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ResourceWindow.xaml.cs">
+    <Compile Include="Windows\ResourceWindow.xaml.cs">
       <DependentUpon>ResourceWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Working_GroupWindow.xaml.cs">
+    <Compile Include="Windows\Working_GroupWindow.xaml.cs">
       <DependentUpon>Working_GroupWindow.xaml</DependentUpon>
     </Compile>
-    <Page Include="AccountWindow.xaml">
+    <Page Include="Windows\AccountWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -152,19 +152,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="DepartmentWindow.xaml">
+    <Page Include="Windows\DepartmentWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="LoginWindow.xaml">
+    <Page Include="Windows\LoginWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindow.xaml">
+    <Page Include="Windows\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="AccountWindow.xaml.cs">
+    <Compile Include="Windows\AccountWindow.xaml.cs">
       <DependentUpon>AccountWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="AddEditWindows\AddEditOrganization.xaml.cs">
@@ -174,52 +174,52 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DepartmentWindow.xaml.cs">
+    <Compile Include="Windows\DepartmentWindow.xaml.cs">
       <DependentUpon>DepartmentWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="LoginWindow.xaml.cs">
+    <Compile Include="Windows\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="OperatorWindow.xaml">
+    <Page Include="Windows\OperatorWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="OrganizationWindow.xaml">
+    <Page Include="Windows\OrganizationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="PeopleWindow.xaml">
+    <Page Include="Windows\PeopleWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="PositionWindow.xaml">
+    <Page Include="Windows\PositionWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ResourceWindow.xaml">
+    <Page Include="Windows\ResourceWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Working_GroupWindow.xaml">
+    <Page Include="Windows\Working_GroupWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="OperatorWindow.xaml.cs">
+    <Compile Include="Windows\OperatorWindow.xaml.cs">
       <DependentUpon>OperatorWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="OrganizationWindow.xaml.cs">
+    <Compile Include="Windows\OrganizationWindow.xaml.cs">
       <DependentUpon>OrganizationWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PeopleWindow.xaml.cs">
+    <Compile Include="Windows\PeopleWindow.xaml.cs">
       <DependentUpon>PeopleWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PositionWindow.xaml.cs">
+    <Compile Include="Windows\PositionWindow.xaml.cs">
       <DependentUpon>PositionWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
