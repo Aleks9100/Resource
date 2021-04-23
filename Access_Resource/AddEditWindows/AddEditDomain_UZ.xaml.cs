@@ -43,21 +43,21 @@ namespace Access_Resource.AddEditWindows
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            using (var db = new ResourceModel())
-            {
-                if (ID == -1)
-                {
-                    MessageBox.Show(db.AddAccount(TB_Login.Text, PB_Password.Text, "Domain", TB_Status.Text));
-                    MainWindow.IsEnabled = true;
-                    this.Close();
-                }
-                else
-                {
-                    MessageBox.Show(db.EditAccount(ID, TB_Login.Text, PB_Password.Text, "Domain",TB_Status.Text));
-                    MainWindow.IsEnabled = true;
-                    this.Close();
-                }
-            }
+            //using (var db = new ResourceModel())
+            //{
+            //    if (ID == -1)
+            //    {
+            //        MessageBox.Show(db.AddAccount(TB_Login.Text, PB_Password.Text, "Domain", TB_Status.Text));
+            //        MainWindow.IsEnabled = true;
+            //        this.Close();
+            //    }
+            //    else
+            //    {
+            //        MessageBox.Show(db.EditAccount(ID, TB_Login.Text, PB_Password.Text, "Domain",TB_Status.Text));
+            //        MainWindow.IsEnabled = true;
+            //        this.Close();
+            //    }
+            //}
         }
     }
 }

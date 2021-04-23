@@ -38,22 +38,24 @@
         </Style>
     </Window.Resources>
     <Grid>
-        <StackPanel>
-            <TextBlock Text="Идентификатор"/>
-            <TextBox x:Name="TB_Indificator"/>
-            <TextBlock Text="IP"/>
-            <TextBox x:Name="TB_IP"/>
-            <TextBlock Text="Описание"/>
-            <TextBox x:Name="TB_Description"/>
-            <TextBlock Text="Имя компьютера"/>
-            <TextBox x:Name="TB_Name"/>
-            <TextBlock Text="Домен"/>
-            <TextBox x:Name="TB_Domen"/>
-            <TextBlock Text="Рабочая группа"/>
-            <ComboBox x:Name="CB_WorkingGroup"/>
-            <TextBlock Text="Сотрудник"/>
-            <ComboBox x:Name="CB_People"/>
-            <Button Name="AddEditButton" Content="Добавить компьютер" Click="Button_Click"/>
-        </StackPanel>
+        <ScrollViewer>
+            <StackPanel>
+                <TextBlock Text="Идентификатор"/>
+                <TextBox x:Name="TB_Indificator"/>
+                <TextBlock Text="IP"/>
+                <TextBox x:Name="TB_IP"/>
+                <TextBlock Text="Описание"/>
+                <TextBox x:Name="TB_Description"/>
+                <TextBlock Text="Имя компьютера"/>
+                <TextBox x:Name="TB_Name"/>
+                <TextBlock Text="Домен"/>
+                <TextBox x:Name="TB_Domen"/>
+                <TextBlock Text="Рабочая группа"/>
+                <ComboBox x:Name="CB_WorkingGroup"/>
+                <TextBlock Text="Сотрудник"/>
+                <ComboBox x:Name="CB_People"/>
+                <Button Name="AddEditButton" Content="Добавить компьютер"/>
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Window>

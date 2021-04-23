@@ -36,7 +36,7 @@
                 <MenuItem Header="Учетные записи"/>
             </MenuItem>
         </Menu>
-        <DataGrid x:Name="DGR" Grid.Column="0" Grid.Row="1">
+        <DataGrid AutoGenerateColumns="False" x:Name="DGR" Grid.Column="0" Grid.Row="1">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="IP" Header="IP адрес" Width="*" Binding="{Binding Path=IP}"/>
                 <DataGridTextColumn Header="Описание" Width="*" Binding="{Binding Path=Description}"/>

@@ -41,7 +41,7 @@
         <StackPanel>
             <TextBlock Text="Название рабочей группы"/>
             <TextBox x:Name="TB_Title"/>
-            <Button Name="AddEditButton" Content="Добавить рабочую группу" Click="Button_Click"/>
+            <Button Name="AddEditButton" Content="Добавить рабочую группу"/>
         </StackPanel>
     </Grid>
 </Window>

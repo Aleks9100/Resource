@@ -24,9 +24,12 @@ namespace Access_Resource
         public DepartmentWindow()
         {
             InitializeComponent();
+            using (var db = new ResourceModel())
+            {
+                DGR.ItemsSource = db.GetDepartment(); 
+            }
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
+            private void Button_Click(object sender, RoutedEventArgs e)
         {
             (new AddEditDepartment(this)).Show();
             IsEnabled = false;

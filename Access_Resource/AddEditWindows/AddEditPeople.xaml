@@ -80,6 +80,6 @@
             <TextBlock Text="Учетная запись Truekonff"/>
             <ComboBox x:Name="CB_Truekonff"/>
         </StackPanel>
-        <Button Name="AddEditButton" Content="Добавить сотрудника" Click="Button_Click" Grid.ColumnSpan="2" Grid.Row="1"/>
+        <Button Name="AddEditButton" Content="Добавить сотрудника" Grid.ColumnSpan="2" Grid.Row="1"/>
     </Grid>
 </Window>

@@ -47,7 +47,7 @@
             <ComboBox x:Name="CB_Role"/>
             <TextBlock Text="Сотрудник"/>
             <ComboBox x:Name="CB_People"/>
-            <Button Name="AddEditButton" Content="Добавить оператора" Click="Button_Click"/>
+            <Button Name="AddEditButton" Content="Добавить оператора" />
         </StackPanel>
     </Grid>
 </Window>

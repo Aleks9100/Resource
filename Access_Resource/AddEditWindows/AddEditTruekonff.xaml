@@ -43,7 +43,7 @@
             <TextBox x:Name="TB_Login"/>
             <TextBlock Text="Пароль"/>
             <TextBox x:Name="TB_Password"/>
-            <Button Name="AddEditButton" Content="Добавить учетную запись Truekonff" Click="Button_Click"/>
+            <Button Name="AddEditButton" Content="Добавить учетную запись Truekonff"/>
         </StackPanel>
     </Grid>
 </Window>

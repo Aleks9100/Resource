@@ -41,7 +41,7 @@
         <StackPanel>
             <TextBlock Text="Название должности"/>
             <TextBox x:Name="TB_Title"/>
-            <Button Name="AddEditButton" Content="Добавить должность" Click="Button_Click"/>
+            <Button Name="AddEditButton" Content="Добавить должность"/>
         </StackPanel>
     </Grid>
 </Window>

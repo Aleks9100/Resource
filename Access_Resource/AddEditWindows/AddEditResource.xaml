@@ -55,7 +55,7 @@
             <DatePicker x:Name="TB_DateEnd"/>
             <TextBlock Text="Сотрудник"/>
             <ComboBox x:Name="TB_People"/>
-            <Button Name="AddEditButton" Content="Добавить ресурс" Click="Button_Click"/>
+            <Button Name="AddEditButton" Content="Добавить ресурс"/>
         </StackPanel>
     </Grid>
 </Window>

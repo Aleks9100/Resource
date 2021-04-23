@@ -36,7 +36,7 @@
                 <MenuItem Header="Учетные записи"/>
             </MenuItem>
         </Menu>
-        <DataGrid x:Name="DGR" Grid.Column="0" Grid.Row="1">
+        <DataGrid x:Name="DGR" AutoGenerateColumns="False" Grid.Column="0" Grid.Row="1">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Название должности" Width="*" Binding="{Binding Path=Title}"/>
             </DataGrid.Columns>
