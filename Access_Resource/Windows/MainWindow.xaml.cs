@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ResourceDatabase;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,11 +21,42 @@ namespace Access_Resource
     /// </summary>
     public partial class MainWindow : Window
     {
-        int ID=0;
-        public MainWindow(int id)
+        public MainWindow()
         {
             InitializeComponent();
-            ID = id;
+            Update();
         }
+        public void Update()
+        {
+            DGR.ItemsSource = null;
+            using (var db = new ResourceModel())
+            {
+                DGR.ItemsSource = db.GetComputer();
+            }
+        }
+
+        private void RemoveComputer_Click(object sender, RoutedEventArgs e)
+        {
+            using (var db = new ResourceModel())
+            {
+                MessageBox.Show(db.RemoveComputer(db.ConvertorObjectInInt(DGR.SelectedValue)));
+            }
+        }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            (new DepartmentWindow()).Show();
+            this.Close();
+        }
+
+        private void AddComputer_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void EditComputer_Click(object sender, RoutedEventArgs e)
+        {
+
+        }       
     }
 }

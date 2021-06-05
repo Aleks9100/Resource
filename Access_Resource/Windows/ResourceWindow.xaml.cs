@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ResourceDatabase;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,31 @@ namespace Access_Resource
         public ResourceWindow()
         {
             InitializeComponent();
+            Update();
+        }
+
+        public void Update()
+        {
+            DGR.ItemsSource = null;
+            using (var db = new ResourceModel())
+            {
+                DGR.ItemsSource = db.GetResource();
+            }
+        }
+
+        private void AddResource_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void EditResource_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void RemoveResource_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

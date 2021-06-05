@@ -8,25 +8,54 @@
         Title="Компьютер" Height="500" Width="800">
     <Window.Resources>
         <Style TargetType="Button">
-            <Setter Property="Margin" Value="10"/>
-            <Setter Property="Foreground" Value="#1E90FF"/>
-            <Setter Property="FontSize" Value="15"/>
-            <Setter Property="Padding" Value="5"/>
+            <Setter Property="Foreground" Value="#00BFFF"/>
+            <Setter Property="BorderBrush" Value="Gray"/>
+            <Setter Property="BorderThickness" Value="0, 0, 0, 0.8"/>
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="0, 3, 0, 1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="15" Width="180" Height="25" Background="White" BorderThickness="1">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center">
+                            </ContentPresenter>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="DataGrid">
+            <Setter Property="Margin" Value="2"/>
+            <Setter Property="AutoGenerateColumns" Value="False"/>
+        </Style>
+        <Style TargetType="DataGridRow">
+            <Setter Property="BorderBrush" Value="#1E90FF"/>
+            <Setter Property="BorderThickness" Value="0,0,0,0.8"/>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="FontSize" Value="10"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Padding" Value="3"/>
+        </Style>
+        <Style TargetType="ComboBox">
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Padding" Value="3"/>
         </Style>
     </Window.Resources>
-    <Grid>
+    <Grid Background="#C0C0C0">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="7*"/>
+            <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="20"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
-        <Menu Grid.Column="0" Grid.Row="0">
+        <Menu Grid.Column="0" Grid.Row="0" Margin="0,0,5,0">
             <MenuItem Header="Таблицы">
-                <MenuItem Header="Отдел"/>
+                <MenuItem Header="Отдел" Click="MenuItem_Click"/>
                 <MenuItem Header="Оператор"/>
                 <MenuItem Header="Организация"/>
                 <MenuItem Header="Сотрудник"/>
@@ -38,6 +67,7 @@
         </Menu>
         <DataGrid AutoGenerateColumns="False" x:Name="DGR" Grid.Column="0" Grid.Row="1">
             <DataGrid.Columns>
+                <DataGridTextColumn x:Name="Indificator" Header="Идентификатор" Width="*" Binding="{Binding Path=Indificator}"/>
                 <DataGridTextColumn x:Name="IP" Header="IP адрес" Width="*" Binding="{Binding Path=IP}"/>
                 <DataGridTextColumn Header="Описание" Width="*" Binding="{Binding Path=Description}"/>
                 <DataGridTextColumn Header="Имя компьютера" Width="*" Binding="{Binding Path=Name}"/>
@@ -45,19 +75,28 @@
                 <DataGridTextColumn Header="Рабочая группа" Width="*" Binding="{Binding Path=Working_Group.Title}"/>
             </DataGrid.Columns>
         </DataGrid>
-        <StackPanel Grid.Column="0" Grid.Row="2" Orientation="Horizontal">
-            <Grid Width="auto">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto"/>
-                    <ColumnDefinition Width="auto"/>
-                    <ColumnDefinition Width="auto"/>
-                    <ColumnDefinition Width="auto"/>
-                </Grid.ColumnDefinitions>
-                <Button Content="Добавить" Grid.Column="0"/>
-                <Button Content="Редактировать"  Grid.Column="1"/>
-                <Button Content="Удаление"  Grid.Column="2"/>
-                <Button Content="Поиск"  Grid.Column="3"/>
-            </Grid>
-        </StackPanel>
+        <DockPanel x:Name="AdminPanelComputer" Grid.Column="1" Grid.RowSpan="2">
+            <StackPanel DockPanel.Dock="Top">
+                <TextBlock Text="Идентификатор"/>
+                <TextBox x:Name="TB_Indificator"/>
+                <TextBlock Text="IP"/>
+                <TextBox x:Name="TB_IP"/>
+                <TextBlock Text="Описание"/>
+                <TextBox x:Name="TB_Description"/>
+                <TextBlock Text="Имя компьютера"/>
+                <TextBox x:Name="TB_Name"/>
+                <TextBlock Text="Домен"/>
+                <TextBox x:Name="TB_Domen"/>
+                <TextBlock Text="Рабочая группа"/>
+                <ComboBox x:Name="CB_WorkingGroup"/>
+                <TextBlock Text="Сотрудник"/>
+                <ComboBox x:Name="CB_People"/>
+            </StackPanel>
+            <StackPanel Margin="0,10,0,0">
+                <Button Content="Добавить" Name="AddComputer" Click="AddComputer_Click"/>
+                <Button Content="Изменить запись" Name="EditDepartament" Click="EditComputer_Click"/>
+                <Button Content="Удалить запись" Name="RemoveDepartament" Click="RemoveComputer_Click"/>
+            </StackPanel>
+        </DockPanel>
     </Grid>
 </Window>

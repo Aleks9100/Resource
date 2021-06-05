@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ResourceDatabase;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,44 @@ namespace Access_Resource
         public PositionWindow()
         {
             InitializeComponent();
+            Update();
+        }
+
+        public void Update()
+        {
+            DGR.ItemsSource = null;
+            using (var db = new ResourceModel())
+            {
+                DGR.ItemsSource = db.GetPosition();
+            }
+        }
+
+        private void AddPosition_Click(object sender, RoutedEventArgs e)
+        {
+
+            using (var db = new ResourceModel())
+            {
+                MessageBox.Show(db.AddPosition(TB_Title.Text));
+            }
+            Update();
+        }
+
+        private void EditPosition_Click(object sender, RoutedEventArgs e)
+        {
+            using (var db = new ResourceModel())
+            {
+                MessageBox.Show(db.EditPosition(db.ConvertorObjectInInt(DGR.SelectedValue), TB_Title.Text));
+            }
+            Update();
+        }
+
+        private void RemovePosition_Click(object sender, RoutedEventArgs e)
+        {
+            using (var db = new ResourceModel())
+            {
+                MessageBox.Show(db.RemovePosition(Convert.ToInt32(DGR.SelectedValue)));
+            }
+            Update();
         }
     }
 }

@@ -8,23 +8,58 @@
         Title="ResourceWindow" Height="450" Width="800">
     <Window.Resources>
         <Style TargetType="Button">
-            <Setter Property="Margin" Value="10"/>
-            <Setter Property="Foreground" Value="#1E90FF"/>
-            <Setter Property="FontSize" Value="15"/>
-            <Setter Property="Padding" Value="5"/>
+            <Setter Property="Foreground" Value="#00BFFF"/>
+            <Setter Property="BorderBrush" Value="Gray"/>
+            <Setter Property="BorderThickness" Value="0, 0, 0, 0.8"/>
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="0, 3, 0, 1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="15" Width="180" Height="25" Background="White" BorderThickness="1">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center">
+                            </ContentPresenter>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="DataGrid">
+            <Setter Property="Margin" Value="2"/>
+            <Setter Property="AutoGenerateColumns" Value="False"/>
+        </Style>
+        <Style TargetType="DataGridRow">
+            <Setter Property="BorderBrush" Value="#1E90FF"/>
+            <Setter Property="BorderThickness" Value="0,0,0,0.8"/>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="FontSize" Value="10"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Padding" Value="5"/>
+        </Style>
+        <Style TargetType="DatePicker">
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Padding" Value="3"/>
+        </Style>
+        <Style TargetType="ComboBox">
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Padding" Value="3"/>
         </Style>
     </Window.Resources>
-    <Grid>
+    <Grid Background="#C0C0C0">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="7*"/>
+            <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="20"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
-        <Menu Grid.Column="0" Grid.Row="0">
+        <Menu Grid.Column="0" Grid.Row="0" Margin="0,0,5,0">
             <MenuItem Header="Таблицы">
                 <MenuItem Header="Компьютер"/>
                 <MenuItem Header="Отдел"/>
@@ -44,11 +79,22 @@
                 <DataGridTextColumn Header="Сотрудник" Width="*" Binding="{Binding Path=People.LastName}"/>
             </DataGrid.Columns>
         </DataGrid>
-        <StackPanel Grid.Column="0" Grid.Row="2" Orientation="Horizontal" Width="auto">
-            <Button Content="Добавить" />
-            <Button Content="Редактировать"/>
-            <Button Content="Удаление"/>
-            <Button Content="Поиск" HorizontalAlignment="Right"/>
-        </StackPanel>
+        <DockPanel x:Name="AdminPanelResource" Grid.Column="1" Grid.RowSpan="2">
+            <StackPanel DockPanel.Dock="Top">
+                <TextBlock Text="Название ресурса"/>
+                <TextBox x:Name="TB_Title"/>
+                <TextBlock Text="Дата доступа"/>
+                <DatePicker x:Name="TB_DateStart"/>
+                <TextBlock Text="Дата блокировки"/>
+                <DatePicker x:Name="TB_DateEnd"/>
+                <TextBlock Text="Сотрудник"/>
+                <ComboBox x:Name="TB_People"/>
+            </StackPanel>
+            <StackPanel Margin="0,10,0,0">
+                <Button Content="Добавить" Name="AddResource" Click="AddResource_Click"/>
+                <Button Content="Изменить запись" Name="EditResource" Click="EditResource_Click"/>
+                <Button Content="Удалить запись" Name="RemoveResource" Click="RemoveResource_Click"/>
+            </StackPanel>
+        </DockPanel>
     </Grid>
 </Window>

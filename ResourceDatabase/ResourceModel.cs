@@ -30,7 +30,6 @@ namespace ResourceDatabase
         public virtual DbSet<Organization> Organizations { get; set; }
         public virtual DbSet<People> Peoples { get; set; }
         public virtual DbSet<Position> Positions { get; set; }
-        public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<Working_Group> Working_Groups { get; set; }
         public virtual DbSet<Type_Account> Type_Accounts { get; set; }
 
@@ -101,7 +100,7 @@ namespace ResourceDatabase
             }
             catch (Exception ex) { return ex.Message; }
         }
-        public string AddOperator(string login, string password, int roleID, int peopleID)
+        public string AddOperator(string login, string password, int peopleID)
         {
             try
             {
@@ -109,7 +108,6 @@ namespace ResourceDatabase
                 {
                     Login = login,
                     Password = password,
-                    RoleID = roleID,
                     PeopleID = peopleID
                 });
                 SaveChanges();
@@ -179,21 +177,7 @@ namespace ResourceDatabase
             }
             catch (Exception ex) { return ex.Message; }
         }
-        public string AddRole(string title, List<Visibility> titleTable, List<Visibility> titleColumn) 
-        {
-            try 
-            {
-                Roles.Add(new Role()
-                {
-                    Title = title,
-                    TitleTable = titleTable,
-                    TitleColumn = titleColumn
-                });
-                SaveChanges();
-                return "Запись успешно добавлена";
-            }
-            catch (Exception ex) { return ex.Message; }
-        }
+       
         public string AddWorking_Group(string title) 
         {
             try 
@@ -259,14 +243,13 @@ namespace ResourceDatabase
             }
             catch (Exception ex) { return ex.Message; }
         }
-        public string EditOperator(int id,string login, string password, int roleID, int peopleID)
+        public string EditOperator(int id,string login, string password, int peopleID)
         {
             try
             {
                 var item = Operators.FirstOrDefault(i=>i.OperatorID == id);
                 item.Login = login;
                 item.Password = password;
-                item.RoleID = roleID;
                 item.PeopleID = peopleID;
                 SaveChanges();
                    return "Запись успешно изменена";
@@ -331,19 +314,7 @@ namespace ResourceDatabase
             }
             catch (Exception ex) { return ex.Message; }
         }
-        public string EditRole(int id,string title, List<Visibility> titleTable, List<Visibility> titleColumn)
-        {
-            try
-            {
-                var item = Roles.FirstOrDefault(i=>i.RoleID == id);
-                item.Title = title;
-                item.TitleTable = titleTable;
-                item.TitleColumn = titleColumn;
-                SaveChanges();
-                   return "Запись успешно изменена";
-            }
-            catch (Exception ex) { return ex.Message; }
-        }
+   
         public string EditWorking_Group(int id,string title)
         {
             try
@@ -448,17 +419,7 @@ namespace ResourceDatabase
             }
             catch (Exception ex) { return ex.Message; }
         }
-        public string RemoveRole(int id)
-        {
-            try
-            {
-                var item = Roles.FirstOrDefault(i => i.RoleID == id);
-                Roles.Remove(item);
-                SaveChanges();
-                return "Запись успешно удалена";
-            }
-            catch (Exception ex) { return ex.Message; }
-        }
+     
         public string RemoveWorking_Group(int id)
         {
             try
@@ -478,20 +439,18 @@ namespace ResourceDatabase
         public List<Operator> GetOperator() => Operators.ToList();
         public List<Organization> GetOrganization() => Organizations.ToList();
         public List<People> GetPeople() => Peoples.ToList();
-        public List<Position> GetPosition() => Positions.ToList();
-        public List<Role> GetRole() => Roles.ToList();
+        public List<Position> GetPosition() => Positions.ToList();    
         public List<Working_Group> GetWorking_Group() => Working_Groups.ToList();
         #region GetInId       
         public Domain_UZ GetDomain_UZInId(int id) => Domain_UZs.FirstOrDefault(i => i.Domain_UZID == id);
-        public Account GetKerioInId(int id) => Accounts.FirstOrDefault(i => i.AccountID == id);    
+        public Account GetAccountInID(int id) => Accounts.FirstOrDefault(i => i.AccountID == id);    
         public Resource GetResourceInId(int id) => Resources.FirstOrDefault(i=>i.ResourceID == id);
         public Computer GetComputerInId(int id) => Computers.FirstOrDefault(i => i.ComputerID == id);
         public Department GetDepartmentInId(int id) => Departments.FirstOrDefault(i => i.DepartmentID == id);
         public Operator GetOperatorInId(int id) => Operators.FirstOrDefault(i=>i.OperatorID == id);
         public Organization GetOrganizationInId(int id) => Organizations.FirstOrDefault(i=>i.OrganizationID == id);
         public People GetPeopleInId(int id) => Peoples.FirstOrDefault(i=>i.PeopleID == id);
-        public Position GetPositionInId(int id) => Positions.FirstOrDefault(i=>i.PositionID == id);
-        public Role GetRoleInId(int id) => Roles.FirstOrDefault(i=>i.RoleID == id);
+        public Position GetPositionInId(int id) => Positions.FirstOrDefault(i=>i.PositionID == id);    
         public Working_Group GetWorking_GroupInId(int id) => Working_Groups.FirstOrDefault(i=>i.Working_GroupID == id);
            #endregion
 
@@ -505,5 +464,9 @@ namespace ResourceDatabase
             else return -1;
         }
         #endregion
+        public int ConvertorObjectInInt(object text) 
+        {
+            return Convert.ToInt32(text);
+        }
     }
 }

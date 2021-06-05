@@ -12,11 +12,9 @@ namespace ResourceTable.Table
         public int OperatorID { get; set; }
         public string Login { get; set; }
         public string Password { get; set; }
-        public int RoleID { get; set; }
         public int PeopleID { get; set; }
 
         public virtual People People { get; set; }
-        public virtual Role Role { get; set; }
 
     }
 }

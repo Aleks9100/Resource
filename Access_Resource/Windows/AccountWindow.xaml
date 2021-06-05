@@ -35,30 +35,24 @@
                 <MenuItem Header="Учетные записи"/>
             </MenuItem>
         </Menu>
-        <DataGrid x:Name="DGR_Accounts" Grid.Column="0" Grid.Row="1">
+        <DataGrid x:Name="DGR_Accounts" Grid.Column="0" Grid.Row="1" SelectedValuePath="AccountID">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Доменная УЗ логин" Width="*" Binding="{Binding Path=Domain_UZ.Login}"/>
+                <DataGridTextColumn Header="Логин" Width="*" Binding="{Binding Path=Domain_UZ.Login}"/>
                 <DataGridTextColumn Header="Доменная УЗ пароль" Width="*" Binding="{Binding Path=Domain_UZ.Password}"/>
                 <DataGridTextColumn Header="Доменная УЗ статус" Width="*" Binding="{Binding Path=Domain_UZ.Status}"/>
-                <DataGridTextColumn Header="Kerio логин" Width="*" Binding="{Binding Path=Kerio.Login}"/>
-                <DataGridTextColumn Header="Kerio пароль" Width="*" Binding="{Binding Path=Kerio.Password}"/>
-                <DataGridTextColumn Header="Directum логин" Width="*" Binding="{Binding Path=Directum.Login}"/>
-                <DataGridTextColumn Header="Directum пароль" Width="*" Binding="{Binding Path=Directum.Password}"/>
-                <DataGridTextColumn Header="1C_ERP логин" Width="*" Binding="{Binding Path=_1C_ERP.Login}"/>
-                <DataGridTextColumn Header="1C_ERP пароль" Width="*" Binding="{Binding Path=_1C_ERP.Password}"/>
-                <DataGridTextColumn Header="Почта логин" Width="*" Binding="{Binding Path=Mail.Login}"/>
-                <DataGridTextColumn Header="Почта пароль" Width="*" Binding="{Binding Path=Mail.Password}"/>
-                <DataGridTextColumn Header="Truekonff логин" Width="*" Binding="{Binding Path=Truekonff.Login}"/>
-                <DataGridTextColumn Header="Truekonff пароль" Width="*" Binding="{Binding Path=Truekonff.Password}"/>
-                <DataGridTextColumn Header="Cisco_Webex логин" Width="*" Binding="{Binding Path=Cisco_Webex.Login}"/>
-                <DataGridTextColumn Header="Cisco_Webex пароль" Width="*" Binding="{Binding Path=Cisco_Webex.Password}"/>
             </DataGrid.Columns>
         </DataGrid>
-        <StackPanel Grid.Column="0" Grid.Row="2" Orientation="Horizontal" Width="auto">
-            <Button Content="Добавить" />
-            <Button Content="Редактировать"/>
-            <Button Content="Удаление"/>
-            <Button Content="Поиск" HorizontalAlignment="Right"/>
+        <StackPanel Grid.Column="0" Grid.Row="2" Orientation="Horizontal" Width="900">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+            </Grid>
+            <Button Content="Добавить"  Grid.Column="0" Click="Button_Click"/>
+            <Button Content="Редактировать" Grid.Column="1" Click="Button_Click_1"/>
+            <Button Content="Удаление" RenderTransformOrigin="0.5,0.5" Click="Button_Click_2"/>
         </StackPanel>
     </Grid>
 </Window>

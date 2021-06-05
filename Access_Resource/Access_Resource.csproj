@@ -61,39 +61,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AddEditWindows\AddEditAccount.xaml.cs">
-      <DependentUpon>AddEditAccount.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="AddEditWindows\AddEditComputer.xaml.cs">
-      <DependentUpon>AddEditComputer.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="AddEditWindows\AddEditDepartment.xaml.cs">
-      <DependentUpon>AddEditDepartment.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="AddEditWindows\AddEditDomain_UZ.xaml.cs">
-      <DependentUpon>AddEditDomain_UZ.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="AddEditWindows\AddEditOperator.xaml.cs">
-      <DependentUpon>AddEditOperator.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="AddEditWindows\AddEditPeople.xaml.cs">
-      <DependentUpon>AddEditPeople.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="AddEditWindows\AddEditPosition.xaml.cs">
-      <DependentUpon>AddEditPosition.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="AddEditWindows\AddEditResource.xaml.cs">
-      <DependentUpon>AddEditResource.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="AddEditWindows\AddEditRole.xaml.cs">
-      <DependentUpon>AddEditRole.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="AddEditWindows\AddEditTruekonff.xaml.cs">
-      <DependentUpon>AddEditTruekonff.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="AddEditWindows\AddEditWorkingGroup.xaml.cs">
-      <DependentUpon>AddEditWorkingGroup.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Windows\ResourceWindow.xaml.cs">
       <DependentUpon>ResourceWindow.xaml</DependentUpon>
     </Compile>
@@ -101,54 +68,6 @@
       <DependentUpon>Working_GroupWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="Windows\AccountWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="AddEditWindows\AddEditAccount.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="AddEditWindows\AddEditComputer.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="AddEditWindows\AddEditDepartment.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="AddEditWindows\AddEditDomain_UZ.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="AddEditWindows\AddEditOperator.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="AddEditWindows\AddEditOrganization.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="AddEditWindows\AddEditPeople.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="AddEditWindows\AddEditPosition.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="AddEditWindows\AddEditResource.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="AddEditWindows\AddEditRole.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="AddEditWindows\AddEditTruekonff.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="AddEditWindows\AddEditWorkingGroup.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -166,9 +85,6 @@
     </Page>
     <Compile Include="Windows\AccountWindow.xaml.cs">
       <DependentUpon>AccountWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="AddEditWindows\AddEditOrganization.xaml.cs">
-      <DependentUpon>AddEditOrganization.xaml</DependentUpon>
     </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>

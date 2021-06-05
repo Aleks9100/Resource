@@ -11,7 +11,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using Access_Resource.AddEditWindows;
 using ResourceDatabase;
 
 namespace Access_Resource
@@ -24,29 +23,42 @@ namespace Access_Resource
         public DepartmentWindow()
         {
             InitializeComponent();
+            Update();
+        }
+
+        public void Update() 
+        {
+            DGR.ItemsSource = null;
             using (var db = new ResourceModel())
             {
-                DGR.ItemsSource = db.GetDepartment(); 
+                DGR.ItemsSource = db.GetDepartment();
             }
         }
-            private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            (new AddEditDepartment(this)).Show();
-            IsEnabled = false;
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            (new AddEditDepartment(this,Convert.ToInt32(DGR.SelectedValue))).Show();
-            IsEnabled = false;
-        }
-
-        private void Button_Click_2(object sender, RoutedEventArgs e)
+        private void RemoveDepartament_Click(object sender, RoutedEventArgs e)
         {
             using (var db = new ResourceModel())
             {
                     MessageBox.Show(db.RemoveDepartmentOrOrganization(Convert.ToInt32(DGR.SelectedValue), "Department"));
             }
+            Update();
+        }
+
+        private void AddDepartament_Click(object sender, RoutedEventArgs e)
+        {
+            using (var db = new ResourceModel())
+            {
+                    MessageBox.Show(db.AddDepartmentOrOrganization(TB_Title.Text, "Department"));
+            }
+            Update();
+        }
+
+        private void EditDepartament_Click(object sender, RoutedEventArgs e)
+        {
+            using (var db = new ResourceModel())
+            {
+                MessageBox.Show(db.EditDepartmentOrOrganization(db.ConvertorObjectInInt(DGR.SelectedValue), TB_Title.Text, "Department"));
+            }
+            Update();
         }
     }
 }

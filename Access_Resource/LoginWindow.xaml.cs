@@ -52,7 +52,7 @@ namespace Access_Resource
             //}
             if (TB_Login.Text == "admin" && PB_Password.Password == "1") 
             {
-                (new DepartmentWindow()).Show();
+                (new MainWindow()).Show();
                 this.Close();
             }
         }
