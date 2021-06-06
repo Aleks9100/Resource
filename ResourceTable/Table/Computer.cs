@@ -1,4 +1,4 @@
-﻿using ResourceTable.Table.Logins_Passwords;
+﻿using ResourceTable.Table;
 using System;
 using System.Collections.Generic;
 using System.Linq;

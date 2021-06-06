@@ -26,6 +26,11 @@ namespace Access_Resource
             InitializeComponent();
             Update();
         }
+        public MainWindow(int id)
+        {
+            InitializeComponent();
+            Update();
+        }
         public void Update()
         {
             DGR.ItemsSource = null;

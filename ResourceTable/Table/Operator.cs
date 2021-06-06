@@ -12,9 +12,8 @@ namespace ResourceTable.Table
         public int OperatorID { get; set; }
         public string Login { get; set; }
         public string Password { get; set; }
-        public int PeopleID { get; set; }
-
+        public string UserStatus { get; set; }
+        public int? PeopleID { get; set; }
         public virtual People People { get; set; }
-
     }
 }

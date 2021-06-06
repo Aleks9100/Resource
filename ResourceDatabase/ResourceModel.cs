@@ -1,10 +1,12 @@
 ﻿using ResourceTable.Table;
-using ResourceTable.Table.Logins_Passwords;
 using System;
 using System.Windows;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
+using System.IO;
+using System.Text.Json;
 
 namespace ResourceDatabase
 {
@@ -19,11 +21,18 @@ namespace ResourceDatabase
         public ResourceModel()
             : base("name=ResourceDatabase")
         {
-
+            if (Operators.Count() == 0) 
+            {
+                AddOperator("admin", "admin", 0, "admin");
+                
+            }
         }
 
         #region Tables
         public virtual DbSet<Resource> Resources { get; set; }
+        public virtual DbSet<Admin> Admins { get; set; }
+        public virtual DbSet<Password> Passwords { get; set; }
+        public virtual DbSet<Account> Accounts { get; set; }
         public virtual DbSet<Computer> Computers { get; set; }
         public virtual DbSet<Department> Departments { get; set; }
         public virtual DbSet<Operator> Operators { get; set; }
@@ -31,29 +40,8 @@ namespace ResourceDatabase
         public virtual DbSet<People> Peoples { get; set; }
         public virtual DbSet<Position> Positions { get; set; }
         public virtual DbSet<Working_Group> Working_Groups { get; set; }
-        public virtual DbSet<Type_Account> Type_Accounts { get; set; }
-
-        public virtual DbSet<Account> Accounts { get; set; }
-        public virtual DbSet<Domain_UZ> Domain_UZs { get; set; }
         #endregion
-        #region AddTable
-        public string AddAccount(string login, string password, int titleID, int accountID, int peopleID)
-        {
-            try
-            {               
-                      Accounts.Add(new Account()
-                    {
-                        Login = login,
-                        Password = password,
-                        AccountID = accountID,
-                        PeopleID= peopleID,
-                        Type_AccountID = titleID
-                    });
-                SaveChanges();
-                return "Запись успешно добавлена";
-            }
-            catch (Exception ex) { return ex.Message; }
-        }
+        #region AddTable 
         public string AddComputer(string indificator, string iP, string description, string name, string domen, int working_GroupID, int peopleID)
         {
             try
@@ -100,20 +88,62 @@ namespace ResourceDatabase
             }
             catch (Exception ex) { return ex.Message; }
         }
-        public string AddOperator(string login, string password, int peopleID)
+        public string AddOperator(string login, string password, int peopleID,string status)
         {
             try
-            {
-                Operators.Add(new Operator()
+            {             
+                int count = 0;
+                string passwordE = Encryption.DefaultKey();
+                if (status == "admin")
                 {
-                    Login = login,
-                    Password = password,
-                    PeopleID = peopleID
-                });
+                    foreach (var st in Operators.Where(i => i.UserStatus.Contains("admin")).ToList()) { count++; }
+
+                    status = "admin" + (count + 1);
+                    AddAdmin(status);
+                    //if (Admins.Count() != 1)
+                    //{
+                    //    var p = Passwords.ToList();
+                    //    var a = Admins.ToList();
+                    //    Password password1 = new Password { Flag = admin.Flag, Passwords = Encryption.Encrypt(Encryption.Decrypt(p[0].Passwords, a[0].Key), admin.Key) };
+                    //    Passwords.Add(password1);
+                    //    SaveChanges();
+                    //}
+                }
+
+                if (peopleID == 0)
+                {
+                    Operators.Add(new Operator()
+                    {
+                        Login = login,
+                        Password = Encryption.Encrypt(password, passwordE),
+                        UserStatus = status
+                    });
+                }
+                else
+                {
+                    Operators.Add(new Operator()
+                    {
+                        Login = login,
+                        Password = Encryption.Encrypt(password, passwordE),
+                        PeopleID = peopleID,
+                        UserStatus = status
+                    });
+                }
                 SaveChanges();
                 return "Запись успешно добавлена";
             }
             catch (Exception ex) { return ex.Message; }
+        }
+        public void AddAdmin(string status) 
+        {
+            Admin admin = new Admin()
+            {
+                Title = status,
+                Key = Encryption.GetUniqueKey(8),
+                Flag = Encryption.GetUniqueKey(16)
+            };
+            Admins.Add(admin);
+            SaveChanges();
         }
         public string AddPeople(string firstName, string lastName, string middleName, string phone, string phoneVoIP, List<int> ids)
         {
@@ -128,14 +158,7 @@ namespace ResourceDatabase
                     PhoneVoIP = phoneVoIP,
                     PositionID = ids[0],
                     OrganizationID = ids[1],
-                    DepartmentID = ids[2],
-                    _1C_ERPID = ids[3],
-                    Cisco_WebexID = ids[4],
-                    DirectumID = ids[5],
-                    Domain_UZID = ids[6],
-                    KerioID = ids[7],
-                    MailID = ids[8],
-                    TruekonffID = ids[9]
+                    DepartmentID = ids[2],                  
                 };
                 Peoples.Add(people);
                 Departments.FirstOrDefault(i => i.DepartmentID == ids[2]).People.Add(people);
@@ -192,18 +215,7 @@ namespace ResourceDatabase
             catch (Exception ex) { return ex.Message; }
         }
         #endregion
-        #region EditTable
-        //Додеписать метод
-
-        //public string EditAccount(int id,string login, string password, string title,string status)
-        //{
-        //    try
-        //    {             
-        //        SaveChanges();
-        //        return "Запись успешно изменена";
-        //    }
-        //    catch (Exception ex) { return ex.Message; }
-        //}      
+        #region EditTable        
         public string EditComputer(int id,string indificator, string iP, string description, string name, string domen, int working_GroupID, int peopleID)
         {
             try
@@ -272,18 +284,11 @@ namespace ResourceDatabase
                 item.PositionID = ids[0];
                 item.OrganizationID = ids[1];
                 item.DepartmentID = ids[2];
-                item._1C_ERPID = ids[3];
-                item.Cisco_WebexID = ids[4];
-                item.DirectumID = ids[5];
-                item.Domain_UZID = ids[6];
-                item.KerioID = ids[7];
-                item.MailID = ids[8];
-                item.TruekonffID = ids[9];
                 Departments.FirstOrDefault(i => i.DepartmentID == ids[2]).People.Add(item);
                 Organizations.FirstOrDefault(i => i.OrganizationID == ids[1]).People.Add(item);
                 Positions.FirstOrDefault(i => i.PositionID == ids[0]).People.Add(item);
                 SaveChanges();
-                   return "Запись успешно изменена";
+                return "Запись успешно изменена";
             }
             catch (Exception ex) { return ex.Message; }
         }
@@ -328,17 +333,6 @@ namespace ResourceDatabase
         }
         #endregion
         #region RemoveTable
-        public string RemoveAccount(int id)
-        {
-            try
-            {
-                var item = Accounts.FirstOrDefault(i => i.AccountID == id);
-                Accounts.Remove(item);
-                SaveChanges();
-                return "Запись успешно удалена";
-            }
-            catch (Exception ex) { return ex.Message; }
-        }
         public string RemoveComputer(int id)
         {
             try
@@ -441,32 +435,25 @@ namespace ResourceDatabase
         public List<People> GetPeople() => Peoples.ToList();
         public List<Position> GetPosition() => Positions.ToList();    
         public List<Working_Group> GetWorking_Group() => Working_Groups.ToList();
-        #region GetInId       
-        public Domain_UZ GetDomain_UZInId(int id) => Domain_UZs.FirstOrDefault(i => i.Domain_UZID == id);
-        public Account GetAccountInID(int id) => Accounts.FirstOrDefault(i => i.AccountID == id);    
-        public Resource GetResourceInId(int id) => Resources.FirstOrDefault(i=>i.ResourceID == id);
-        public Computer GetComputerInId(int id) => Computers.FirstOrDefault(i => i.ComputerID == id);
-        public Department GetDepartmentInId(int id) => Departments.FirstOrDefault(i => i.DepartmentID == id);
-        public Operator GetOperatorInId(int id) => Operators.FirstOrDefault(i=>i.OperatorID == id);
-        public Organization GetOrganizationInId(int id) => Organizations.FirstOrDefault(i=>i.OrganizationID == id);
-        public People GetPeopleInId(int id) => Peoples.FirstOrDefault(i=>i.PeopleID == id);
-        public Position GetPositionInId(int id) => Positions.FirstOrDefault(i=>i.PositionID == id);    
-        public Working_Group GetWorking_GroupInId(int id) => Working_Groups.FirstOrDefault(i=>i.Working_GroupID == id);
-           #endregion
-
+        #endregion
         public int Authorization(string login, string password) 
         {
-            var item = Operators.FirstOrDefault(i=>i.Login == login && i.Password == password);
+            int id = -1;
+            var item = Operators.FirstOrDefault(i=>i.Login == login);
             if (item != null)
             {
-                return item.OperatorID;
+                if (password == Encryption.Decrypt(item.Password, Encryption.DefaultKey()))
+                    {
+                        id = item.OperatorID;
+                    }
             }
-            else return -1;
+            return id;
         }
-        #endregion
         public int ConvertorObjectInInt(object text) 
         {
             return Convert.ToInt32(text);
         }
+
+        
     }
 }

@@ -1,4 +1,4 @@
-﻿using ResourceTable.Table.Logins_Passwords;
+﻿using ResourceTable.Table;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,13 +21,6 @@ namespace ResourceTable.Table
         public int PositionID { get; set; }
         public int OrganizationID { get; set; }
         public int DepartmentID { get; set; }
-        public int _1C_ERPID { get; set; }
-        public int Cisco_WebexID { get; set; }
-        public int DirectumID { get; set; }
-        public int Domain_UZID { get; set; }
-        public int KerioID { get; set; }
-        public int MailID { get; set; }
-        public int TruekonffID { get; set; }
         public virtual List<Resource> Resources { get; set; }
 
         public string Full_Name()
@@ -38,7 +31,6 @@ namespace ResourceTable.Table
         public virtual Organization Organization { get; set; }
         public virtual Position Position { get; set; }
         public virtual Department Department { get; set; }
-        public virtual List<Account> Accounts { get; set; }
-        public virtual Domain_UZ Domain_UZ { get; set; }
+     //   public virtual List<Account> Accounts { get; set; }
     }
 }
