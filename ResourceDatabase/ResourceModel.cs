@@ -482,6 +482,14 @@ namespace ResourceDatabase
             var flag = Admins.FirstOrDefault(a => a.Title == Operators.FirstOrDefault(c => c.OperatorID == id).UserStatus).Flag;
             var p = Passwords.FirstOrDefault(i => i.Flag == flag).Passwords;
             return p;
+        } 
+        public string GetPasswordD(int id)
+        {
+            var flag = Admins.FirstOrDefault(a => a.Title == Operators.FirstOrDefault(c => c.OperatorID == id).UserStatus).Flag;
+            var key = Admins.FirstOrDefault(a => a.Title == Operators.FirstOrDefault(c => c.OperatorID == id).UserStatus).Key;
+            var p = Passwords.FirstOrDefault(i => i.Flag == flag).Passwords;
+            string d = Encryption.Decrypt(p,key);
+            return d;
         }
         #endregion
         public int Authorization(string login, string password) 

@@ -47,6 +47,28 @@ namespace Access_Resource
             }
             DGR_Accounts.ItemsSource = accounts;
         }
+
+        private void Decrypt_Click(object sender, RoutedEventArgs e)
+        {
+            List<AccountModel> accounts = new List<AccountModel>();
+            DGR_Accounts.ItemsSource = null;
+            using (var db = new ResourceModel())
+            {
+                var acc = db.GetAccount();
+                foreach (var a in acc)
+                {
+                    accounts.Add(new AccountModel()
+                    {
+                        Login = a.Login,
+                        Type_Account = a.Type_Account,
+                        LastNamePeople = a.LastNamePeople,
+                        Passwords = db.GetPasswordD(ID)
+                    });
+                }
+            }
+            DGR_Accounts.ItemsSource = accounts;
+        }
+
         private void AddAccount_Click(object sender, RoutedEventArgs e)
         {
 
@@ -98,9 +120,9 @@ namespace Access_Resource
             this.Close();
         }
 
-        private void Decrypt_Click(object sender, RoutedEventArgs e)
+        private void Encrypt_Click(object sender, RoutedEventArgs e)
         {
-
+            Update();
         }
     }
 }
