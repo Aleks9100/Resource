@@ -20,10 +20,87 @@ namespace Access_Resource
     /// </summary>
     public partial class AccountWindow : Window
     {
-        public AccountWindow()
+        int ID = 0;
+        public AccountWindow(int id)
         {
             InitializeComponent();
+            ID = id;
+            Update();
         }
-      
+        public void Update() 
+        {
+            List<AccountModel> accounts = new List<AccountModel>();
+            DGR_Accounts.ItemsSource = null;
+            using (var db = new ResourceModel()) 
+            {
+                var acc = db.GetAccount();
+                foreach (var a in acc)
+                {
+                    accounts.Add(new AccountModel()
+                    {
+                        Login = a.Login,
+                        Type_Account = a.Type_Account,
+                        LastNamePeople = a.LastNamePeople,
+                        Passwords = db.GetPassword(ID)
+                    });
+                }
+            }
+            DGR_Accounts.ItemsSource = accounts;
+        }
+        private void AddAccount_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void Deparatament_Click(object sender, RoutedEventArgs e)
+        {
+            (new DepartmentWindow(ID)).Show();
+            this.Close();
+        }
+
+        private void Computer_Click(object sender, RoutedEventArgs e)
+        {
+            (new MainWindow(ID)).Show();
+            this.Close();
+        }
+        private void Operator_Click(object sender, RoutedEventArgs e)
+        {
+            (new OperatorWindow(ID)).Show();
+            this.Close();
+        }
+
+        private void Organization_Click(object sender, RoutedEventArgs e)
+        {
+            (new OrganizationWindow(ID)).Show();
+            this.Close();
+        }
+
+        private void People_Click(object sender, RoutedEventArgs e)
+        {
+            (new PeopleWindow(ID)).Show();
+            this.Close();
+        }
+
+        private void Position__Click(object sender, RoutedEventArgs e)
+        {
+            (new PositionWindow(ID)).Show();
+            this.Close();
+        }
+
+        private void Resource__Click(object sender, RoutedEventArgs e)
+        {
+            (new ResourceWindow(ID)).Show();
+            this.Close();
+        }
+
+        private void WG__Click(object sender, RoutedEventArgs e)
+        {
+            (new Working_GroupWindow(ID)).Show();
+            this.Close();
+        }
+
+        private void Decrypt_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

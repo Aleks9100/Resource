@@ -8,47 +8,86 @@
         Title="OperatorWindow" Height="450" Width="800">
     <Window.Resources>
         <Style TargetType="Button">
-            <Setter Property="Margin" Value="10"/>
-            <Setter Property="Foreground" Value="#1E90FF"/>
-            <Setter Property="FontSize" Value="15"/>
-            <Setter Property="Padding" Value="5"/>
+            <Setter Property="Foreground" Value="#00BFFF"/>
+            <Setter Property="BorderBrush" Value="Gray"/>
+            <Setter Property="BorderThickness" Value="0, 0, 0, 0.8"/>
             <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="0, 3, 0, 1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="15" Width="180" Height="25" Background="White" BorderThickness="1">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center">
+                            </ContentPresenter>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="DataGrid">
+            <Setter Property="Margin" Value="2"/>
+            <Setter Property="AutoGenerateColumns" Value="False"/>
+        </Style>
+        <Style TargetType="DataGridRow">
+            <Setter Property="BorderBrush" Value="#1E90FF"/>
+            <Setter Property="BorderThickness" Value="0,0,0,0.8"/>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Padding" Value="3"/>
+        </Style>
+        <Style TargetType="ComboBox">
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Padding" Value="3"/>
         </Style>
     </Window.Resources>
-    <Grid>
+    <Grid Background="#C0C0C0">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="7*"/>
+            <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="20"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
-        <Menu Grid.Column="0" Grid.Row="0">
+        <Menu Grid.Column="0" Grid.Row="0" Margin="0,0,5,0">
             <MenuItem Header="Таблицы">
-                <MenuItem Header="Компьютер"/>
-                <MenuItem Header="Отдел"/>
-                <MenuItem Header="Организация"/>
-                <MenuItem Header="Сотрудник"/>
-                <MenuItem Header="Должность"/>
-                <MenuItem Header="Ресурс"/>
-                <MenuItem Header="Рабочая группа"/>
-                <MenuItem Header="Учетные записи"/>
+                <MenuItem Header="Отдел" Click="Deparatament_Click"/>
+                <MenuItem Header="Компьютер" Click="Computer_Click"/>
+                <MenuItem Header="Организация" Click="Organization_Click"/>
+                <MenuItem Header="Сотрудник" Click="People_Click"/>
+                <MenuItem Header="Должность" Click="Position__Click"/>
+                <MenuItem Header="Ресурс" Click="Resource__Click"/>
+                <MenuItem Header="Рабочая группа" Click="WG__Click"/>
+                <MenuItem Name="Account" Header="Учетные записи" Click="Account_Click"/>
             </MenuItem>
         </Menu>
-        <DataGrid AutoGenerateColumns="False" x:Name="DGR" Grid.Column="0" Grid.Row="1">
+        <DataGrid AutoGenerateColumns="False" SelectedValuePath="OperatorID" Margin="0,0,5,0" x:Name="DGR" Grid.Column="0" Grid.Row="1">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Логин" Width="*" Binding="{Binding Path=Login}"/>
                 <DataGridTextColumn Header="Пароль" Width="*" Binding="{Binding Path=Password}"/>
-                <DataGridTextColumn Header="Роль" Width="*" Binding="{Binding Path=Role.Title}"/>
-                <DataGridTextColumn Header="Сотрудник" Width="*" Binding="{Binding Path=People.LastName}"/>
+                <DataGridTextColumn Header="Статус" Width="*" Binding="{Binding Path=UserStatus}"/>
             </DataGrid.Columns>
         </DataGrid>
-        <StackPanel Grid.Column="0" Grid.Row="2" Orientation="Horizontal" Width="auto">
-            <Button Content="Добавить" />
-            <Button Content="Редактировать"/>
-            <Button Content="Удаление"/>
-            <Button Content="Поиск" HorizontalAlignment="Right"/>
-        </StackPanel>
+        <DockPanel x:Name="AdminPanelOperator" Grid.Column="1" Grid.RowSpan="2">
+            <StackPanel DockPanel.Dock="Top">
+                <TextBlock Text="Логин"/>
+                <TextBox x:Name="TB_Login"/>
+                <TextBlock Text="Пароль"/>
+                <TextBox x:Name="TB_Password"/>
+                <TextBlock Text="Сотрудник"/>
+                <ComboBox x:Name="CB_People" DisplayMemberPath="LastName" SelectedValuePath ="PeopleID"/>
+                <TextBlock Text="Статус"/>
+                <ComboBox x:Name="CB_Status"/>
+            </StackPanel>
+            <StackPanel Margin="0,10,0,0">
+                <Button Content="Добавить" Name="AddComputer" Click="AddOperator_Click"/>
+               <!--<Button Content="Изменить запись" Name="EditDepartament" Click="EditOperator_Click"/>-->
+                <Button Content="Удалить запись" Name="RemoveDepartament" Click="RemoveOperator_Click"/>
+            </StackPanel>
+        </DockPanel>
     </Grid>
 </Window>

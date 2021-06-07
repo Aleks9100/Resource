@@ -50,6 +50,7 @@ namespace Access_Resource
                 if (id != -1)
                 {
                     (new MainWindow(id)).Show();
+                    this.Close();
                 }
                 else MessageBox.Show("Неверный логин или пароль");
             }

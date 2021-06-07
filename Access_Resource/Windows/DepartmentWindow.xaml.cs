@@ -20,10 +20,21 @@ namespace Access_Resource
     /// </summary>
     public partial class DepartmentWindow : Window
     {
-        public DepartmentWindow()
+        int ID = 0;
+        public DepartmentWindow(int id)
         {
             InitializeComponent();
             Update();
+            ID = id;
+            using (var db = new ResourceModel()) 
+            {
+                if (!db.StatusAdmin(id)) 
+                {
+                    AdminPanelDepartament.Visibility = Visibility.Hidden;
+                    Account.Visibility = Visibility.Hidden;
+                    Operator.Visibility = Visibility.Hidden;
+                }
+            }
         }
 
         public void Update() 
@@ -60,5 +71,53 @@ namespace Access_Resource
             }
             Update();
         }
+        private void Computer_Click(object sender, RoutedEventArgs e)
+        {
+            (new MainWindow(ID)).Show();
+            this.Close();
+        }
+        private void Operator_Click(object sender, RoutedEventArgs e)
+        {
+            (new OperatorWindow(ID)).Show();
+            this.Close();
+        }
+
+        private void Organization_Click(object sender, RoutedEventArgs e)
+        {
+            (new OrganizationWindow(ID)).Show();
+            this.Close();
+        }
+
+        private void People_Click(object sender, RoutedEventArgs e)
+        {
+            (new PeopleWindow(ID)).Show();
+            this.Close();
+        }
+
+        private void Position__Click(object sender, RoutedEventArgs e)
+        {
+            (new PositionWindow(ID)).Show();
+            this.Close();
+        }
+
+        private void Resource__Click(object sender, RoutedEventArgs e)
+        {
+            (new ResourceWindow(ID)).Show();
+            this.Close();
+        }
+
+        private void WG__Click(object sender, RoutedEventArgs e)
+        {
+            (new Working_GroupWindow(ID)).Show();
+            this.Close();
+        }
+
+        private void Account_Click(object sender, RoutedEventArgs e)
+        {
+            (new AccountWindow(ID)).Show();
+            this.Close();
+        }
+
+        
     }
 }

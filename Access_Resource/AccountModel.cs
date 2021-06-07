@@ -1,19 +1,16 @@
-﻿using ResourceDatabase;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ResourceTable.Table
+namespace Access_Resource
 {
-   public class Account
+    public class AccountModel
     {
-        public int AccountID { get; set; }
         public string Login { get; set; }
-        public int PasswordID { get; set; }
         public string Type_Account { get; set; }
         public string LastNamePeople { get; set; }
-        public virtual Password Password { get; set; }
+        public string Passwords { get; set; }
     }
 }

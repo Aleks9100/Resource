@@ -42,8 +42,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Table\Account.cs" />
+    <Compile Include="Table\Admin.cs" />
+    <Compile Include="Table\Password.cs" />
     <Compile Include="Table\Resource.cs" />
-    <Compile Include="Table\Column.cs" />
     <Compile Include="Table\Department.cs" />
     <Compile Include="Table\Operator.cs" />
     <Compile Include="Table\Organization.cs" />

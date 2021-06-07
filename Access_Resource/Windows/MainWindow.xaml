@@ -33,7 +33,7 @@
             <Setter Property="BorderThickness" Value="0,0,0,0.8"/>
         </Style>
         <Style TargetType="TextBox">
-            <Setter Property="FontSize" Value="10"/>
+            <Setter Property="FontSize" Value="15"/>
             <Setter Property="Background" Value="White"/>
             <Setter Property="Padding" Value="3"/>
         </Style>
@@ -55,17 +55,17 @@
         </Grid.RowDefinitions>
         <Menu Grid.Column="0" Grid.Row="0" Margin="0,0,5,0">
             <MenuItem Header="Таблицы">
-                <MenuItem Header="Отдел" Click="MenuItem_Click"/>
-                <MenuItem Header="Оператор"/>
-                <MenuItem Header="Организация"/>
-                <MenuItem Header="Сотрудник"/>
-                <MenuItem Header="Должность"/>
-                <MenuItem Header="Ресурс"/>
-                <MenuItem Header="Рабочая группа"/>
-                <MenuItem Header="Учетные записи"/>
+                <MenuItem Header="Отдел" Click="Deparatament_Click"/>
+                <MenuItem x:Name="Operator" Header="Оператор" Click="Operator_Click"/>
+                <MenuItem Header="Организация" Click="Organization_Click"/>
+                <MenuItem Header="Сотрудник" Click="People_Click"/>
+                <MenuItem Header="Должность" Click="Position__Click"/>
+                <MenuItem Header="Ресурс" Click="Resource__Click"/>
+                <MenuItem Header="Рабочая группа" Click="WG__Click"/>
+                <MenuItem Name="Account" Header="Учетные записи" Click="Account_Click"/>
             </MenuItem>
         </Menu>
-        <DataGrid AutoGenerateColumns="False" x:Name="DGR" Grid.Column="0" Grid.Row="1">
+        <DataGrid AutoGenerateColumns="False" SelectedValuePath="ComputerID"  Margin="0,0,5,0" x:Name="DGR" Grid.Column="0" Grid.Row="1">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="Indificator" Header="Идентификатор" Width="*" Binding="{Binding Path=Indificator}"/>
                 <DataGridTextColumn x:Name="IP" Header="IP адрес" Width="*" Binding="{Binding Path=IP}"/>
@@ -73,6 +73,7 @@
                 <DataGridTextColumn Header="Имя компьютера" Width="*" Binding="{Binding Path=Name}"/>
                 <DataGridTextColumn Header="Домен" Width="*" Binding="{Binding Path=Domen}"/>
                 <DataGridTextColumn Header="Рабочая группа" Width="*" Binding="{Binding Path=Working_Group.Title}"/>
+                <DataGridTextColumn Header="Фамилия сотрудника" Width="*" Binding="{Binding Path=People.LastName}"/>
             </DataGrid.Columns>
         </DataGrid>
         <DockPanel x:Name="AdminPanelComputer" Grid.Column="1" Grid.RowSpan="2">
@@ -88,9 +89,9 @@
                 <TextBlock Text="Домен"/>
                 <TextBox x:Name="TB_Domen"/>
                 <TextBlock Text="Рабочая группа"/>
-                <ComboBox x:Name="CB_WorkingGroup"/>
+                <ComboBox x:Name="CB_WorkingGroup" DisplayMemberPath="Title" SelectedValuePath ="Working_GroupID"/>
                 <TextBlock Text="Сотрудник"/>
-                <ComboBox x:Name="CB_People"/>
+                <ComboBox x:Name="CB_People" DisplayMemberPath="LastName" SelectedValuePath ="PeopleID"/>
             </StackPanel>
             <StackPanel Margin="0,10,0,0">
                 <Button Content="Добавить" Name="AddComputer" Click="AddComputer_Click"/>

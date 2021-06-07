@@ -7,6 +7,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.IO;
 using System.Text.Json;
+using ResourceDatabase.Table;
+using System.Data.Entity.Validation;
 
 namespace ResourceDatabase
 {
@@ -24,7 +26,28 @@ namespace ResourceDatabase
             if (Operators.Count() == 0) 
             {
                 AddOperator("admin", "admin", 0, "admin");
+                AddDepartmentOrOrganization("Отдел Директора", "Department");
+                AddDepartmentOrOrganization("ОРЛЗ", "Organization");
+                AddPosition("Директор");
+                AddWorking_Group("Группа директора");
+                AddPeople("Алексей", "Петров", "Петрович", "89123456781", "241", 1, 1, 1);
+                AddResource("Cisco", DateTime.Now, DateTime.Now.AddMonths(5), 1);
+                AddComputer("12445121", "172.168.14.12", "Компьютер директора", "Director", "domen", 1, 1);
                 
+                Accounts.Add(new Account()
+                {
+                    LastNamePeople = "Петров",
+                    Login = "PetrovAP",
+                    Type_Account="Cisco"
+                });
+                var pass = new Password()
+                {
+                    Passwords = Encryption.Encrypt("Petrov", Admins.FirstOrDefault(i => i.Title == "admin0").Key),
+                    Flag = Admins.FirstOrDefault(i => i.Title == "admin0").Flag,
+                    AccountID = 1
+                };
+                Passwords.Add(pass);
+                SaveChanges();
             }
         }
 
@@ -97,8 +120,7 @@ namespace ResourceDatabase
                 if (status == "admin")
                 {
                     foreach (var st in Operators.Where(i => i.UserStatus.Contains("admin")).ToList()) { count++; }
-
-                    status = "admin" + (count + 1);
+                    status = "admin" + count;
                     AddAdmin(status);
                     //if (Admins.Count() != 1)
                     //{
@@ -109,7 +131,6 @@ namespace ResourceDatabase
                     //    SaveChanges();
                     //}
                 }
-
                 if (peopleID == 0)
                 {
                     Operators.Add(new Operator()
@@ -130,22 +151,41 @@ namespace ResourceDatabase
                     });
                 }
                 SaveChanges();
+               
                 return "Запись успешно добавлена";
             }
             catch (Exception ex) { return ex.Message; }
         }
         public void AddAdmin(string status) 
         {
-            Admin admin = new Admin()
+            string key = Encryption.GetUniqueKey(8);
+            string flag = Encryption.GetUniqueKey(16);
+            Admins.Add(new Admin() 
             {
                 Title = status,
-                Key = Encryption.GetUniqueKey(8),
-                Flag = Encryption.GetUniqueKey(16)
-            };
-            Admins.Add(admin);
-            SaveChanges();
+                Key = key,
+                Flag = flag
+            });
+            if (Accounts.Count() != 0 && Admins.Count() != 1) 
+            {
+                var account = Accounts.ToList();
+                var admin = Admins.ToList(); 
+                for (int i = 0; i < account.Count(); i++)
+                {
+                    var pass = account[i].Passwords[i].Passwords;
+                    var keyA = admin[i].Key;
+                    account[i].Passwords.Add(new Password()
+                    {
+                        AccountID = account[i].AccountID,
+                        Flag = Encryption.Encrypt(flag, key),
+                        Passwords = Encryption.Encrypt(Encryption.Decrypt(pass,keyA),key)
+                    }) ;
+                }
+
+            }
+            SaveChanges();           
         }
-        public string AddPeople(string firstName, string lastName, string middleName, string phone, string phoneVoIP, List<int> ids)
+        public string AddPeople(string firstName, string lastName, string middleName, string phone, string phoneVoIP, int idDep,int IdOrg,int IdPos)
         {
             try
             {
@@ -156,14 +196,14 @@ namespace ResourceDatabase
                     MiddleName = middleName,
                     Phone = phone,
                     PhoneVoIP = phoneVoIP,
-                    PositionID = ids[0],
-                    OrganizationID = ids[1],
-                    DepartmentID = ids[2],                  
+                    PositionID =IdPos,
+                    OrganizationID =IdOrg,
+                    DepartmentID = idDep,                  
                 };
                 Peoples.Add(people);
-                Departments.FirstOrDefault(i => i.DepartmentID == ids[2]).People.Add(people);
-                Organizations.FirstOrDefault(i => i.OrganizationID == ids[1]).People.Add(people);
-                Positions.FirstOrDefault(i => i.PositionID == ids[0]).People.Add(people);
+                Departments.FirstOrDefault(i => i.DepartmentID == idDep).People.Add(people);
+                Organizations.FirstOrDefault(i => i.OrganizationID == IdOrg).People.Add(people);
+                Positions.FirstOrDefault(i => i.PositionID == IdPos).People.Add(people);
                 SaveChanges();
                 return "Запись успешно добавлена";
             }
@@ -268,7 +308,7 @@ namespace ResourceDatabase
             }
             catch (Exception ex) { return ex.Message; }
         }
-        public string EditPeople(int id,string firstName, string lastName, string middleName, string phone, string phoneVoIP, List<int> ids)
+        public string EditPeople(int id,string firstName, string lastName, string middleName, string phone, string phoneVoIP, int idDep, int IdOrg, int IdPos)
         {
             try
             {
@@ -281,12 +321,12 @@ namespace ResourceDatabase
                 item.MiddleName = middleName;
                 item.Phone = phone;
                 item.PhoneVoIP = phoneVoIP;
-                item.PositionID = ids[0];
-                item.OrganizationID = ids[1];
-                item.DepartmentID = ids[2];
-                Departments.FirstOrDefault(i => i.DepartmentID == ids[2]).People.Add(item);
-                Organizations.FirstOrDefault(i => i.OrganizationID == ids[1]).People.Add(item);
-                Positions.FirstOrDefault(i => i.PositionID == ids[0]).People.Add(item);
+                item.PositionID = IdPos;
+                item.OrganizationID = IdOrg;
+                item.DepartmentID = idDep;
+                Departments.FirstOrDefault(i => i.DepartmentID == idDep).People.Add(item);
+                Organizations.FirstOrDefault(i => i.OrganizationID == IdOrg).People.Add(item);
+                Positions.FirstOrDefault(i => i.PositionID == IdPos).People.Add(item);
                 SaveChanges();
                 return "Запись успешно изменена";
             }
@@ -427,14 +467,22 @@ namespace ResourceDatabase
         }
         #endregion
         #region GetTable
+        public List<Account> GetAccount() => Accounts.ToList();
         public List<Resource> GetResource() => Resources.ToList();
         public List<Computer> GetComputer() => Computers.ToList();
         public List<Department> GetDepartment() => Departments.ToList();
+        public string GetKey(string status) => Admins.FirstOrDefault(i=>i.Title == status).Key;
         public List<Operator> GetOperator() => Operators.ToList();
         public List<Organization> GetOrganization() => Organizations.ToList();
         public List<People> GetPeople() => Peoples.ToList();
         public List<Position> GetPosition() => Positions.ToList();    
         public List<Working_Group> GetWorking_Group() => Working_Groups.ToList();
+        public string GetPassword(int id)
+        {
+            var flag = Admins.FirstOrDefault(a => a.Title == Operators.FirstOrDefault(c => c.OperatorID == id).UserStatus).Flag;
+            var p = Passwords.FirstOrDefault(i => i.Flag == flag).Passwords;
+            return p;
+        }
         #endregion
         public int Authorization(string login, string password) 
         {
@@ -448,6 +496,15 @@ namespace ResourceDatabase
                     }
             }
             return id;
+        }
+        public bool StatusAdmin(int id)
+        {
+            if (Operators.FirstOrDefault(i => i.OperatorID == id).UserStatus.Contains("admin"))
+            {
+                return true;
+            }
+            else
+                return false;
         }
         public int ConvertorObjectInInt(object text) 
         {
