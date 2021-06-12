@@ -94,6 +94,10 @@
                 <Button Content="Добавить" Name="AddResource" Click="AddResource_Click"/>
                 <Button Content="Изменить запись" Name="EditResource" Click="EditResource_Click"/>
                 <Button Content="Удалить запись" Name="RemoveResource" Click="RemoveResource_Click"/>
+                <Button Content="Вывести список ресурсов" Name="ReportResource" Click="ReportResource_Click"/>
+                <Button Content="Ресурсы сроком меньше 3 дней" Name="ReportResourceIn3Days" Click="ReportResourceIn3Days_Click"/>
+                <ComboBox x:Name="CB_ReportPeople"  DisplayMemberPath="LastName" SelectedValuePath ="PeopleID"/>
+                <Button Content="Ресурсы сотрудника" Name="ReportResourceInPeople" Click="ReportResourceInPeople_Click"/>
             </StackPanel>
         </DockPanel>
     </Grid>

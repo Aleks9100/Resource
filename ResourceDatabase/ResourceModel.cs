@@ -9,6 +9,7 @@ using System.IO;
 using System.Text.Json;
 using ResourceDatabase.Table;
 using System.Data.Entity.Validation;
+using ClosedXML.Excel;
 
 namespace ResourceDatabase
 {
@@ -492,6 +493,134 @@ namespace ResourceDatabase
             return d;
         }
         #endregion
+        #region Report
+        public string ReportResource()
+        {
+            try
+            {
+                string message = "";
+                string dir = System.Reflection.Assembly.GetExecutingAssembly().Location.Replace(@"ResourceDatabase.dll", ""); 
+                var workbook = new XLWorkbook();
+                workbook.AddWorksheet();
+                var worksheet = workbook.Worksheet(1);
+                worksheet.Cell("A1").Value = "Название";
+                worksheet.Cell("B1").Value = "Дата начала";
+                worksheet.Cell("C1").Value = "Дата окончания";
+                worksheet.Cell("D1").Value = "Фамилия сотрудника";
+                int row = 2;
+                var resource = Resources.ToList();
+                if (resource != null)
+                {
+                    foreach (var item in resource)
+                    {
+                        worksheet.Cell("A" + row).Value = item.Title;
+                        worksheet.Cell("B" + row).Value = item.Date_Start.ToString("dd/MM/yyyy");
+                        worksheet.Cell("C" + row).Value = item.Date_End.ToString("dd/MM/yyyy");
+                        worksheet.Cell("D" + row).Value = item.People.LastName;
+                        row++;
+                    }
+                    message = "Успешно";
+                }
+                else
+                    message = "Нет данных для вывода";
+                
+                worksheet.Columns().AdjustToContents();
+                string fileName = $@"{dir}\Отчет\Ресурсы.xlsx";
+                workbook.SaveAs(fileName);
+                System.Diagnostics.Process.Start(fileName);
+
+                return message;
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }  
+        public string ReportResourceEndIn3Days() 
+        {
+            try
+            {
+                string message = "";
+                string dir = System.Reflection.Assembly.GetExecutingAssembly().Location.Replace(@"ResourceDatabase.dll", ""); 
+                var workbook = new XLWorkbook();
+                workbook.AddWorksheet();
+                var worksheet = workbook.Worksheet(1);
+                worksheet.Cell("A1").Value = "Название";
+                worksheet.Cell("B1").Value = "Дата начала";
+                worksheet.Cell("C1").Value = "Дата окончания";
+                worksheet.Cell("D1").Value = "Фамилия сотрудника";
+                int row = 2;
+                DateTime _3Days = DateTime.Now.AddDays(3);
+                var resource = Resources.Where(i=>i.Date_End <= _3Days).ToList();
+                if (resource != null)
+                {
+                    foreach (var item in resource)
+                    {
+                        worksheet.Cell("A" + row).Value = item.Title;
+                        worksheet.Cell("B" + row).Value = item.Date_Start.ToString("dd/MM/yyyy");
+                        worksheet.Cell("C" + row).Value = item.Date_End.ToString("dd/MM/yyyy");
+                        worksheet.Cell("D" + row).Value = item.People.LastName;
+                        row++;
+                    }
+                    message = "Успешно";
+                }
+                else
+                    message = "Нет данных для вывода";
+
+                worksheet.Columns().AdjustToContents();
+                string fileName = $@"{dir}\Отчет\3 дня.xlsx";
+                workbook.SaveAs(fileName);
+                System.Diagnostics.Process.Start(fileName);
+                return message;
+            }
+            catch (Exception ex) 
+            { 
+                return ex.Message; 
+            }
+        }
+        public string ReportResourceInPeople(int idPeople)
+        {
+            try
+            {
+                string message = "";
+                string dir = System.Reflection.Assembly.GetExecutingAssembly().Location.Replace(@"ResourceDatabase.dll", "");
+                var workbook = new XLWorkbook();
+                workbook.AddWorksheet();
+                var worksheet = workbook.Worksheet(1);
+                worksheet.Cell("A1").Value = "Название";
+                worksheet.Cell("B1").Value = "Дата начала";
+                worksheet.Cell("C1").Value = "Дата окончания";
+                int row = 2;
+                string FIO = Peoples.FirstOrDefault(i => i.PeopleID == idPeople).Full_Name();
+                var resource = Resources.Where(i => i.PeopleID <= idPeople).ToList();
+                if (resource != null)
+                {
+                    foreach (var item in resource)
+                    {
+                        worksheet.Cell("A" + row).Value = item.Title;
+                        worksheet.Cell("B" + row).Value = item.Date_Start.ToString("dd/MM/yyyy");
+                        worksheet.Cell("C" + row).Value = item.Date_End.ToString("dd/MM/yyyy");
+                        row++;
+                    }
+                    message = "Успешно";
+                    worksheet.Cell("A"+(row+1)).Value = "Сотрудник: " + FIO;
+                }
+                else
+                    message = "Нет данных для вывода";
+
+                worksheet.Columns().AdjustToContents();
+                string fileName = $@"{dir}\Отчет\Ресурсы {FIO}.xlsx";
+                workbook.SaveAs(fileName);
+                System.Diagnostics.Process.Start(fileName);
+                return message;
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
+        #endregion
+
         public int Authorization(string login, string password) 
         {
             int id = -1;

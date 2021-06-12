@@ -41,10 +41,12 @@ namespace Access_Resource
         {
             DGR.ItemsSource = null;
             CB_People.ItemsSource = null;
+            CB_ReportPeople.ItemsSource = null;
             using (var db = new ResourceModel())
             {
                 DGR.ItemsSource = db.GetResource();
                 CB_People.ItemsSource = db.GetPeople();
+                CB_ReportPeople.ItemsSource = db.GetPeople();
             }
         }
 
@@ -128,6 +130,30 @@ namespace Access_Resource
         {
             (new AccountWindow(ID)).Show();
             this.Close();
+        }
+
+        private void ReportResource_Click(object sender, RoutedEventArgs e)
+        {
+            using (var db = new ResourceModel()) 
+            {
+                MessageBox.Show(db.ReportResource());
+            }
+        }
+
+        private void ReportResourceIn3Days_Click(object sender, RoutedEventArgs e)
+        {
+            using (var db = new ResourceModel())
+            {
+                MessageBox.Show(db.ReportResourceEndIn3Days());
+            }
+        }
+
+        private void ReportResourceInPeople_Click(object sender, RoutedEventArgs e)
+        {
+            using (var db = new ResourceModel())
+            {
+                MessageBox.Show(db.ReportResourceInPeople(db.ConvertorObjectInInt(CB_ReportPeople.SelectedValue)));
+            }
         }
     }
 }

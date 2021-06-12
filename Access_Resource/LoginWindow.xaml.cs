@@ -23,6 +23,7 @@ namespace Access_Resource
     /// </summary>
     public partial class LoginWindow : Window
     {
+        bool pb = true;
         public LoginWindow()
         {
             InitializeComponent();
@@ -33,6 +34,7 @@ namespace Access_Resource
             TB_Password.Text = PB_Password.Password;
             TB_Password.Visibility = Visibility.Visible;
             PB_Password.Visibility = Visibility.Hidden;
+            pb = false;
         }
 
         private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
@@ -44,6 +46,8 @@ namespace Access_Resource
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            if (!pb)
+                PB_Password.Password = TB_Password.Text;
             using (var db = new ResourceModel())
             {
                 int id = db.Authorization(TB_Login.Text, PB_Password.Password);
