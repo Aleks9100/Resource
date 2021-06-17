@@ -118,5 +118,19 @@ namespace Access_Resource
             (new AccountWindow(ID)).Show();
             this.Close();
         }
+
+        private void SearchOrganization_Click(object sender, RoutedEventArgs e)
+        {
+            DGR.ItemsSource = null;
+            using (var db = new ResourceModel())
+            {
+                DGR.ItemsSource = db.SearchOrganization(TB_Title.Text);
+            }
+        }
+
+        private void Organization_Click(object sender, RoutedEventArgs e)
+        {
+            Update();
+        }
     }
 }

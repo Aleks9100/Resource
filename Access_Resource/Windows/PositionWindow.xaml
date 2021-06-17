@@ -73,6 +73,8 @@
                 <Button Content="Добавить" Name="AddPosition" Click="AddPosition_Click"/>
                 <Button Content="Изменить запись" Name="EditPosition" Click="EditPosition_Click"/>
                 <Button Content="Удалить запись" Name="RemovePosition" Click="RemovePosition_Click"/>
+                <Button Content="Поиск" Name="SeacrhPosition" Click="SeacrhPosition_Click"/>
+                <Button Content="Отмена" Name="Position" Click="Position_Click"/>
             </StackPanel>
         </DockPanel>
     </Grid>

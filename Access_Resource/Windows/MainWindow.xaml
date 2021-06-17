@@ -97,6 +97,8 @@
                 <Button Content="Добавить" Name="AddComputer" Click="AddComputer_Click"/>
                 <Button Content="Изменить запись" Name="EditDepartament" Click="EditComputer_Click"/>
                 <Button Content="Удалить запись" Name="RemoveDepartament" Click="RemoveComputer_Click"/>
+                <Button Content="Поиск" Name="SeacrhComputer" Click="SeacrhComputer_Click"/>
+                <Button Content="Отмена" Name="Computer" Click="Computer_Click"/>
             </StackPanel>
         </DockPanel>
     </Grid>

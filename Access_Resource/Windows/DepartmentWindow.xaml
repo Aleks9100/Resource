@@ -73,6 +73,8 @@
                 <Button Content="Добавить" Name="AddDepartament" Click="AddDepartament_Click"/>
                 <Button Content="Изменить запись" Name="EditDepartament" Click="EditDepartament_Click"/>
                 <Button Content="Удалить запись" Name="RemoveDepartament" Click="RemoveDepartament_Click"/>
+                <Button Content="Поиск" Name="SeacrhDepartament" Click="SeacrhDepartament_Click"/>
+                <Button Content="Отмена" Name="Departament" Click="Departament_Click"/>
             </StackPanel>
         </DockPanel>
     </Grid>

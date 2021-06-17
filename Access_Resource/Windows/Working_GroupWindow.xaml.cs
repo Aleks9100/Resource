@@ -118,5 +118,19 @@ namespace Access_Resource
             (new AccountWindow(ID)).Show();
             this.Close();
         }
+
+        private void SeacrhWG_Click(object sender, RoutedEventArgs e)
+        {
+            DGR.ItemsSource = null;
+            using (var db = new ResourceModel())
+            {
+                DGR.ItemsSource = db.SearchWorking_Group(TB_Title.Text);
+            }
+        }
+
+        private void WG_Click(object sender, RoutedEventArgs e)
+        {
+            Update();
+        }
     }
 }

@@ -81,11 +81,10 @@
                 <TextBox x:Name="TB_Type"/> 
                 <TextBlock Text="Фамилия сотрудника"/>
                 <ComboBox x:Name="CB_LN" DisplayMemberPath="LastName" SelectedValuePath ="PeopleID"/> 
-                <TextBlock Text="Пароль"/>
-                <TextBox x:Name="TB_Password"/>
             </StackPanel>
             <StackPanel Margin="0,10,0,0">
-                <!--<Button Content="Добавить" Name="AddOrganization" Click="AddAccount_Click"/>-->
+                <Button Content="Поиск" Name="SeacrhAccount" Click="SeacrAccount_Click"/>
+                <Button Content="Отмена" Name="Account" Click="Account_Click"/>
                 <Button Content="Посмотреть пароли" Click="Decrypt_Click"/>
                 <Button Content="Скрыть пароли" Click="Encrypt_Click"/>
             </StackPanel>

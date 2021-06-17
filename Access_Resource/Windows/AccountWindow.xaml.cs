@@ -54,7 +54,7 @@ namespace Access_Resource
             DGR_Accounts.ItemsSource = null;
             using (var db = new ResourceModel())
             {
-                var acc = db.GetAccount();
+                var acc = db.GetAccountInId(db.ConvertorObjectInInt(DGR_Accounts.SelectedValue));
                 foreach (var a in acc)
                 {
                     accounts.Add(new AccountModel()
@@ -68,10 +68,29 @@ namespace Access_Resource
             }
             DGR_Accounts.ItemsSource = accounts;
         }
-
-        private void AddAccount_Click(object sender, RoutedEventArgs e)
+        private void SeacrAccount_Click(object sender, RoutedEventArgs e)
         {
-
+            List<AccountModel> accounts = new List<AccountModel>();
+            DGR_Accounts.ItemsSource = null;
+            using (var db = new ResourceModel())
+            {
+                var acc = db.SearchAccount(TB_Login.Text,TB_Type.Text,CB_LN.Text);
+                foreach (var a in acc)
+                {
+                    accounts.Add(new AccountModel()
+                    {
+                        Login = a.Login,
+                        Type_Account = a.Type_Account,
+                        LastNamePeople = a.LastNamePeople,
+                        Passwords = db.GetPasswordD(ID)
+                    });
+                }
+            }
+            DGR_Accounts.ItemsSource = accounts;
+        }
+        private void Account_Click(object sender, RoutedEventArgs e)
+        {
+            Update();
         }
         private void Deparatament_Click(object sender, RoutedEventArgs e)
         {
@@ -124,5 +143,7 @@ namespace Access_Resource
         {
             Update();
         }
+
+        
     }
 }

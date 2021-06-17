@@ -139,5 +139,23 @@ namespace Access_Resource
             (new AccountWindow(ID)).Show();
             this.Close();
         }
+
+        private void SeacrhComputer_Click(object sender, RoutedEventArgs e)
+        {
+            DGR.ItemsSource = null;
+            using (var db = new ResourceModel())
+            {
+                DGR.ItemsSource = db.SeacrhComputer(TB_Indificator.Text,
+                    TB_IP.Text,TB_Name.Text,
+                    TB_Domen.Text,
+                    db.ConvertorObjectInInt(CB_WorkingGroup.SelectedValue),
+                    db.ConvertorObjectInInt(CB_People.SelectedValue));
+            }
+        }
+
+        private void Computer_Click(object sender, RoutedEventArgs e)
+        {
+            Update();
+        }
     }
 }

@@ -155,5 +155,42 @@ namespace Access_Resource
             (new AccountWindow(ID)).Show();
             this.Close();
         }
+
+        private void SearchOperator_Click(object sender, RoutedEventArgs e)
+        {
+            List<OperatorModel> models = new List<OperatorModel>();
+            using (var db = new ResourceModel())
+            {
+                foreach (var op in db.SearchOperator(TB_Login.Text, CB_Status.Text))
+                {
+                    if (op.UserStatus != "user")
+                        models.Add(new OperatorModel()
+                        {
+                            OperatorID = op.OperatorID,
+                            Login = op.Login,
+                            Password = op.Password,
+                            People = op.People,
+                            PeopleID = op.PeopleID,
+                            UserStatus = op.UserStatus.Remove(op.UserStatus.Length - 1)
+                        });
+                    else models.Add(new OperatorModel()
+                    {
+                        OperatorID = op.OperatorID,
+                        Login = op.Login,
+                        Password = op.Password,
+                        People = op.People,
+                        PeopleID = op.PeopleID,
+                        UserStatus = op.UserStatus
+                    });
+                }
+                DGR.ItemsSource = models;
+                CB_People.ItemsSource = db.GetPeople();
+            }
+        }
+
+        private void Operator_Click(object sender, RoutedEventArgs e)
+        {
+            Update();
+        }
     }
 }

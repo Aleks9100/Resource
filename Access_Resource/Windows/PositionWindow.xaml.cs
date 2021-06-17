@@ -119,5 +119,19 @@ namespace Access_Resource
             (new AccountWindow(ID)).Show();
             this.Close();
         }
+
+        private void SeacrhPosition_Click(object sender, RoutedEventArgs e)
+        {
+            DGR.ItemsSource = null;
+            using (var db = new ResourceModel())
+            {
+                DGR.ItemsSource = db.SearchPosition(TB_Title.Text);
+            }
+        }
+
+        private void Position_Click(object sender, RoutedEventArgs e)
+        {
+            Update();
+        }
     }
 }

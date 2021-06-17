@@ -73,6 +73,8 @@
                 <Button Content="Добавить" Name="AddOrganization" Click="AddOrganization_Click"/>
                 <Button Content="Изменить запись" Name="EditOrganization" Click="EditOrganization_Click"/>
                 <Button Content="Удалить запись" Name="RemoveOrganization" Click="RemoveOrganization_Click"/>
+                <Button Content="Поиск" Name="SearchOrganization" Click="SearchOrganization_Click"/>
+                <Button Content="Отмена" Name="Organization" Click="Organization_Click"/>
             </StackPanel>
         </DockPanel>
     </Grid>

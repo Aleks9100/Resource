@@ -469,6 +469,7 @@ namespace ResourceDatabase
         #endregion
         #region GetTable
         public List<Account> GetAccount() => Accounts.ToList();
+        public List<Account> GetAccountInId(int id) => Accounts.Where(i=>i.AccountID == id).ToList();
         public List<Resource> GetResource() => Resources.ToList();
         public List<Computer> GetComputer() => Computers.ToList();
         public List<Department> GetDepartment() => Departments.ToList();
@@ -620,7 +621,36 @@ namespace ResourceDatabase
             }
         }
         #endregion
-
+        #region Search
+        public List<Account> SearchAccount(string login, string typeAccount, string lastname) => Accounts
+            .Where(i => i.LastNamePeople == lastname || i.Login == login || i.Type_Account == typeAccount)
+            .ToList();
+        public List<Resource> SearchResource(string title,DateTime dateStart,DateTime dateEnd,int idpeople) => Resources
+            .Where(i=>i.Title == title || i.Date_Start == dateStart || i.Date_End == dateEnd || i.PeopleID ==idpeople)
+            .ToList();
+        public List<Computer> SeacrhComputer(string indificator,string ip,string name,string domen,int wgID,int peopleId) => Computers
+            .Where(i=>i.Indificator == indificator || i.IP == ip || i.Name==name || i.PeopleID == peopleId || i.Domen == domen || i.Working_GroupID == wgID)
+            .ToList();
+        public List<Department> SearchDepartment(string title) => Departments
+            .Where(i => i.Title == title)
+            .ToList();
+        public List<Operator> SearchOperator(string login,string status) => Operators
+            .Where(i=>i.Login==login || i.UserStatus.Contains(status))
+            .ToList();
+        public List<Organization> SearchOrganization(string title) => Organizations
+            .Where(i => i.Title == title)
+            .ToList();
+        public List<People> SeacrhPeople(string fName,string lName,string mName,string phonVoIp,int positionId,int organizationId,int departamentID) 
+            => Peoples
+            .Where(i=>i.FirstName == fName || i.LastName == lName || i.MiddleName == mName || i.PhoneVoIP == phonVoIp || i.PositionID == positionId || i.OrganizationID == organizationId || i.DepartmentID == departamentID)
+            .ToList();
+        public List<Position> SearchPosition(string title) => Positions
+            .Where(i => i.Title == title)
+            .ToList();
+        public List<Working_Group> SearchWorking_Group(string title) => Working_Groups
+            .Where(i=>i.Title == title)
+            .ToList();
+        #endregion
         public int Authorization(string login, string password) 
         {
             int id = -1;

@@ -73,6 +73,8 @@
                 <Button Content="Добавить" Name="AddWG" Click="AddWG_Click"/>
                 <Button Content="Изменить запись" Name="EditDepartament" Click="EditWG_Click"/>
                 <Button Content="Удалить запись" Name="RemoveWG" Click="RemoveWG_Click"/>
+                <Button Content="Поиск" Name="SeacrhWG" Click="SeacrhWG_Click"/>
+                <Button Content="ОТмена" Name="WG" Click="WG_Click"/>
             </StackPanel>
         </DockPanel>
     </Grid>

@@ -118,6 +118,18 @@ namespace Access_Resource
             this.Close();
         }
 
-        
+        private void SeacrhDepartament_Click(object sender, RoutedEventArgs e)
+        {
+            DGR.ItemsSource = null;
+            using (var db = new ResourceModel())
+            {
+                DGR.ItemsSource = db.SearchDepartment(TB_Title.Text);
+            }
+        }
+
+        private void Departament_Click(object sender, RoutedEventArgs e)
+        {
+            Update();
+        }
     }
 }

@@ -61,6 +61,21 @@ namespace Access_Resource
             }
             Update();
         }
+        private void SeacrhResource_Click(object sender, RoutedEventArgs e)
+        {
+            DGR.ItemsSource = null;        
+            using (var db = new ResourceModel())
+            {
+                DGR.ItemsSource = db.SearchResource(TB_Title.Text,
+                    Convert.ToDateTime(DT_DateStart.SelectedDate),
+                     Convert.ToDateTime(DT_DateEnd.SelectedDate),
+                    db.ConvertorObjectInInt(CB_People.SelectedValue));                
+            }
+        }
+        private void Resource_Click(object sender, RoutedEventArgs e)
+        {          
+            Update();
+        }
 
         private void EditResource_Click(object sender, RoutedEventArgs e)
         {

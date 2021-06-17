@@ -100,7 +100,9 @@
                     <Button Content="Добавить" Name="AddPeople" Click="AddPeople_Click"/>
                     <Button Content="Изменить запись" Name="EditPeople" Click="EditPeople_Click"/>
                     <Button Content="Удалить запись" Name="RemovePeople" Click="RemovePeople_Click"/>
-            </StackPanel>
+                    <Button Content="Поиск" Name="SearchPeople" Click="SearchPeople_Click"/>
+                    <Button Content="Отмена" Name="People" Click="People_Click"/>
+                </StackPanel>
         </DockPanel>
         </ScrollViewer>
     </Grid>

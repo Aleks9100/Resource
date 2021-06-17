@@ -68,7 +68,6 @@ namespace Access_Resource
             }
             Update();
         }
-
         private void EditPeople_Click(object sender, RoutedEventArgs e)
         {
             using (var db = new ResourceModel())
@@ -83,6 +82,22 @@ namespace Access_Resource
                     db.ConvertorObjectInInt(CB_Organization.SelectedValue),
                     db.ConvertorObjectInInt(CB_Position.SelectedValue)));
             }
+            Update();
+        }
+        private void SearchPeople_Click(object sender, RoutedEventArgs e)
+        {
+            DGR.ItemsSource = null;
+           
+            using (var db = new ResourceModel())
+            {
+                DGR.ItemsSource = db.SeacrhPeople(TB_FirstName.Text,TB_LastName.Text,TB_MiddleName.Text,TB_PhoneVoIP.Text,
+                    db.ConvertorObjectInInt(CB_Department.SelectedValue),
+                    db.ConvertorObjectInInt(CB_Organization.SelectedValue),
+                    db.ConvertorObjectInInt(CB_Position.SelectedValue));                
+            }
+        }
+        private void People_Click(object sender, RoutedEventArgs e)
+        {
             Update();
         }
 
