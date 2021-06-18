@@ -41,13 +41,26 @@ namespace ResourceDatabase
                     Login = "PetrovAP",
                     Type_Account="Cisco"
                 });
+                Accounts.Add(new Account()
+                {
+                    LastNamePeople = "Иванов",
+                    Login = "IvnovAP",
+                    Type_Account = "Cisco"
+                });
                 var pass = new Password()
                 {
                     Passwords = Encryption.Encrypt("Petrov", Admins.FirstOrDefault(i => i.Title == "admin0").Key, Admins.FirstOrDefault(i => i.Title == "admin0").Sol),
                     Flag = Admins.FirstOrDefault(i => i.Title == "admin0").Flag,
                     AccountID = 1
                 };
+                var pass1 = new Password()
+                {
+                    Passwords = Encryption.Encrypt("Ivanov", Admins.FirstOrDefault(i => i.Title == "admin0").Key, Admins.FirstOrDefault(i => i.Title == "admin0").Sol),
+                    Flag = Admins.FirstOrDefault(i => i.Title == "admin0").Flag,
+                    AccountID = 2
+                };
                 Passwords.Add(pass);
+                Passwords.Add(pass1);
                 SaveChanges();
             }
         }
@@ -114,8 +127,8 @@ namespace ResourceDatabase
         }
         public string AddOperator(string login, string password, int peopleID,string status)
         {
-            try
-            {
+            //try
+            //{
                 bool rep = false;
                 var operators = Operators.ToList();
                 foreach(var o in operators) 
@@ -167,8 +180,8 @@ namespace ResourceDatabase
                 }
                 else
                     return "Пользователь с таким логином уже существует";
-            }
-            catch (Exception ex) { return ex.Message; }
+            //}
+            //catch (Exception ex) { return ex.Message; }
         }
         public void AddAdmin(string status) 
         {
@@ -189,9 +202,11 @@ namespace ResourceDatabase
                 var admin = Admins.ToList(); 
                 for (int i = 0; i < account.Count(); i++)
                 {
-                    var pass = account[i].Passwords[i].Passwords;
-                    var keyA = admin[i].Key;
-                    var solA = admin[i].Sol;
+                    var flags = admin[0].Flag;
+                    var logins = account[i].Login;
+                    var pass = Passwords.FirstOrDefault(c=>c.Flag == flags && c.AccountID == Accounts.FirstOrDefault(a => a.Login == logins).AccountID).Passwords;
+                    var keyA = admin[0].Key;
+                    var solA = admin[0].Sol;
                     Password password = new Password()
                     {
                         PasswordID = account.Count() + 1,
@@ -430,10 +445,23 @@ namespace ResourceDatabase
         {
             try
             {
-                var item = Operators.FirstOrDefault(i => i.OperatorID == id);
+                int count = 0;
+                foreach (var Id in Operators.ToList())
+                {
+                    if (Id.UserStatus.Contains("admin"))
+                        count++;
+                }
+                var item = Operators.FirstOrDefault(x => x.OperatorID == id);
+                if (item.OperatorID == id)
+                    return "Нельзя удалить самого себя";
+                if (item.UserStatus.Contains("admin") && count == 1)
+                    return "Нельзя удалить последнего админа";
                 if (item.UserStatus.Contains("admin")) 
                 {
-                    Admins.Remove(Admins.FirstOrDefault(i => i.Title == item.UserStatus));
+                    var admin = Admins.FirstOrDefault(i => i.Title == item.UserStatus);
+                    Admins.Remove(admin);
+                    Passwords.Remove(Passwords.FirstOrDefault(i => i.Flag == admin.Flag));
+                    SaveChanges();
                 }
                 Operators.Remove(item);
                 SaveChanges();
@@ -503,19 +531,29 @@ namespace ResourceDatabase
         public List<People> GetPeople() => Peoples.ToList();
         public List<Position> GetPosition() => Positions.ToList();    
         public List<Working_Group> GetWorking_Group() => Working_Groups.ToList();
+        int count = 0;
         public string GetPassword(int id)
         {
+            count++;
             var flag = Admins.FirstOrDefault(a => a.Title == Operators.FirstOrDefault(c => c.OperatorID == id).UserStatus).Flag;
             var key = Admins.FirstOrDefault(a => a.Title == Operators.FirstOrDefault(c => c.OperatorID == id).UserStatus).Key;
-            var p = Passwords.FirstOrDefault(i => i.Flag == flag).Passwords;
-            return p;
+            string pass = "";
+            int countPas = 1;
+            foreach(var p in Passwords.Where(i => i.Flag == flag).ToList())
+            {
+                if (countPas > count)
+                    break;
+                pass = p.Passwords;
+                countPas++;
+            }
+            return pass;
         } 
-        public string GetPasswordD(int id)
+        public string GetPasswordD(int id,string login)
         {
             var flag = Admins.FirstOrDefault(a => a.Title == Operators.FirstOrDefault(c => c.OperatorID == id).UserStatus).Flag;
             var key = Admins.FirstOrDefault(a => a.Title == Operators.FirstOrDefault(c => c.OperatorID == id).UserStatus).Key;
             var sol = Admins.FirstOrDefault(a => a.Title == Operators.FirstOrDefault(c => c.OperatorID == id).UserStatus).Sol;
-            var p = Passwords.FirstOrDefault(i => i.Flag == flag).Passwords;
+            var p = Passwords.FirstOrDefault(i => i.Flag == flag && i.AccountID == Accounts.FirstOrDefault(a=>a.Login == login).AccountID).Passwords;
             string d = Encryption.Decrypt(p,key,sol);
             return d;
         }

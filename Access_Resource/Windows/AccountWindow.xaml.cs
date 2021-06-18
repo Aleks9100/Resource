@@ -63,7 +63,7 @@ namespace Access_Resource
                         Login = a.Login,
                         Type_Account = a.Type_Account,
                         LastNamePeople = a.LastNamePeople,
-                        Passwords = db.GetPasswordD(ID)
+                        Passwords = db.GetPasswordD(ID,a.Login)
                     });
                 }
             }
@@ -85,7 +85,7 @@ namespace Access_Resource
                         Login = a.Login,
                         Type_Account = a.Type_Account,
                         LastNamePeople = a.LastNamePeople,
-                        Passwords = db.GetPasswordD(ID)
+                        Passwords = db.GetPasswordD(ID,a.Login)
                     });
                 }
             }
