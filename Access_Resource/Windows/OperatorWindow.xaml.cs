@@ -34,16 +34,18 @@ namespace Access_Resource
 
                 }
             }
-            Update(); 
+            Update();
+            UpdateCB();
+        }
+        public void UpdateCB() 
+        {
+            CB_Status.Items.Add("admin");
+            CB_Status.Items.Add("user");
         }
         private void Update()
         {
             List<OperatorModel> models = new List<OperatorModel>();
             DGR.ItemsSource = null;
-            CB_People.ItemsSource = null;
-            CB_Status.ItemsSource = null;
-            CB_Status.Items.Add("admin");
-            CB_Status.Items.Add("user");
             using (var db = new ResourceModel())
             {
                 foreach (var op in db.GetOperator())

@@ -38,6 +38,7 @@ namespace Access_Resource
                 {
                     accounts.Add(new AccountModel()
                     {
+                        AccountID = a.AccountID,
                         Login = a.Login,
                         Type_Account = a.Type_Account,
                         LastNamePeople = a.LastNamePeople,
@@ -51,7 +52,6 @@ namespace Access_Resource
         private void Decrypt_Click(object sender, RoutedEventArgs e)
         {
             List<AccountModel> accounts = new List<AccountModel>();
-            DGR_Accounts.ItemsSource = null;
             using (var db = new ResourceModel())
             {
                 var acc = db.GetAccountInId(db.ConvertorObjectInInt(DGR_Accounts.SelectedValue));
@@ -59,6 +59,7 @@ namespace Access_Resource
                 {
                     accounts.Add(new AccountModel()
                     {
+                        AccountID = a.AccountID,
                         Login = a.Login,
                         Type_Account = a.Type_Account,
                         LastNamePeople = a.LastNamePeople,
@@ -66,6 +67,7 @@ namespace Access_Resource
                     });
                 }
             }
+            DGR_Accounts.ItemsSource = null;
             DGR_Accounts.ItemsSource = accounts;
         }
         private void SeacrAccount_Click(object sender, RoutedEventArgs e)
@@ -79,6 +81,7 @@ namespace Access_Resource
                 {
                     accounts.Add(new AccountModel()
                     {
+                        AccountID = a.AccountID,
                         Login = a.Login,
                         Type_Account = a.Type_Account,
                         LastNamePeople = a.LastNamePeople,

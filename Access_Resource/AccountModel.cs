@@ -8,6 +8,7 @@ namespace Access_Resource
 {
     public class AccountModel
     {
+     public int AccountID { get; set; }
         public string Login { get; set; }
         public string Type_Account { get; set; }
         public string LastNamePeople { get; set; }

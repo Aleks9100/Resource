@@ -115,45 +115,57 @@ namespace ResourceDatabase
         public string AddOperator(string login, string password, int peopleID,string status)
         {
             try
-            {             
-                int count = 0;
-                string passwordE = Encryption.DefaultKey();
-                if (status == "admin")
+            {
+                bool rep = false;
+                var operators = Operators.ToList();
+                foreach(var o in operators) 
                 {
-                    foreach (var st in Operators.Where(i => i.UserStatus.Contains("admin")).ToList()) { count++; }
-                    status = "admin" + count;
-                    AddAdmin(status);
-                    //if (Admins.Count() != 1)
-                    //{
-                    //    var p = Passwords.ToList();
-                    //    var a = Admins.ToList();
-                    //    Password password1 = new Password { Flag = admin.Flag, Passwords = Encryption.Encrypt(Encryption.Decrypt(p[0].Passwords, a[0].Key), admin.Key) };
-                    //    Passwords.Add(password1);
-                    //    SaveChanges();
-                    //}
+                    if (o.Login == login)
+                        rep = true;
                 }
-                if (peopleID == 0)
+                if (!rep)
                 {
-                    Operators.Add(new Operator()
+                    int count = 0;
+                    string passwordE = Encryption.DefaultKey();
+                    if (status == "admin")
                     {
-                        Login = login,
-                        Password = Encryption.Encrypt(password, passwordE),
-                        UserStatus = status
-                    });
+                        foreach (var st in Operators.Where(i => i.UserStatus.Contains("admin")).ToList()) { count++; }
+                        status = "admin" + count;
+                        AddAdmin(status);
+                        //if (Admins.Count() != 1)
+                        //{
+                        //    var p = Passwords.ToList();
+                        //    var a = Admins.ToList();
+                        //    Password password1 = new Password { Flag = admin.Flag, Passwords = Encryption.Encrypt(Encryption.Decrypt(p[0].Passwords, a[0].Key), admin.Key) };
+                        //    Passwords.Add(password1);
+                        //    SaveChanges();
+                        //}
+                    }
+                    if (peopleID == 0)
+                    {
+                        Operators.Add(new Operator()
+                        {
+                            Login = login,
+                            Password = Encryption.Encrypt(password, passwordE),
+                            UserStatus = status
+                        });
+                    }
+                    else
+                    {
+                        Operators.Add(new Operator()
+                        {
+                            Login = login,
+                            Password = Encryption.Encrypt(password, passwordE),
+                            PeopleID = peopleID,
+                            UserStatus = status
+                        });
+                    }
+                    SaveChanges();
+
+                    return "Запись успешно добавлена";
                 }
                 else
-                {
-                    Operators.Add(new Operator()
-                    {
-                        Login = login,
-                        Password = Encryption.Encrypt(password, passwordE),
-                        PeopleID = peopleID,
-                        UserStatus = status
-                    });
-                }
-                SaveChanges();
-               
-                return "Запись успешно добавлена";
+                    return "Пользователь с таким логином уже существует";
             }
             catch (Exception ex) { return ex.Message; }
         }
@@ -167,6 +179,7 @@ namespace ResourceDatabase
                 Key = key,
                 Flag = flag
             });
+            SaveChanges();
             if (Accounts.Count() != 0 && Admins.Count() != 1) 
             {
                 var account = Accounts.ToList();
@@ -175,16 +188,19 @@ namespace ResourceDatabase
                 {
                     var pass = account[i].Passwords[i].Passwords;
                     var keyA = admin[i].Key;
-                    account[i].Passwords.Add(new Password()
+                    Password password = new Password()
                     {
+                        PasswordID = account.Count() + 1,
                         AccountID = account[i].AccountID,
-                        Flag = Encryption.Encrypt(flag, key),
-                        Passwords = Encryption.Encrypt(Encryption.Decrypt(pass,keyA),key)
-                    }) ;
+                        Flag = flag,
+                        Passwords = Encryption.Encrypt(Encryption.Decrypt(pass, keyA), key)
+                    };
+                    account[i].Passwords.Add(password) ;
+                    Passwords.Add(password);
+                    SaveChanges();
                 }
-
             }
-            SaveChanges();           
+                    
         }
         public string AddPeople(string firstName, string lastName, string middleName, string phone, string phoneVoIP, int idDep,int IdOrg,int IdPos)
         {
@@ -411,6 +427,10 @@ namespace ResourceDatabase
             try
             {
                 var item = Operators.FirstOrDefault(i => i.OperatorID == id);
+                if (item.UserStatus.Contains("admin")) 
+                {
+                    Admins.Remove(Admins.FirstOrDefault(i => i.Title == item.UserStatus));
+                }
                 Operators.Remove(item);
                 SaveChanges();
                 return "Запись успешно удалена";
@@ -482,6 +502,7 @@ namespace ResourceDatabase
         public string GetPassword(int id)
         {
             var flag = Admins.FirstOrDefault(a => a.Title == Operators.FirstOrDefault(c => c.OperatorID == id).UserStatus).Flag;
+            var key = Admins.FirstOrDefault(a => a.Title == Operators.FirstOrDefault(c => c.OperatorID == id).UserStatus).Key;
             var p = Passwords.FirstOrDefault(i => i.Flag == flag).Passwords;
             return p;
         } 
