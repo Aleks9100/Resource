@@ -43,7 +43,7 @@ namespace ResourceDatabase
                 });
                 var pass = new Password()
                 {
-                    Passwords = Encryption.Encrypt("Petrov", Admins.FirstOrDefault(i => i.Title == "admin0").Key),
+                    Passwords = Encryption.Encrypt("Petrov", Admins.FirstOrDefault(i => i.Title == "admin0").Key, Admins.FirstOrDefault(i => i.Title == "admin0").Sol),
                     Flag = Admins.FirstOrDefault(i => i.Title == "admin0").Flag,
                     AccountID = 1
                 };
@@ -127,6 +127,7 @@ namespace ResourceDatabase
                 {
                     int count = 0;
                     string passwordE = Encryption.DefaultKey();
+                    string solE = Encryption.DefaultSol();
                     if (status == "admin")
                     {
                         foreach (var st in Operators.Where(i => i.UserStatus.Contains("admin")).ToList()) { count++; }
@@ -146,7 +147,7 @@ namespace ResourceDatabase
                         Operators.Add(new Operator()
                         {
                             Login = login,
-                            Password = Encryption.Encrypt(password, passwordE),
+                            Password = Encryption.Encrypt(password, passwordE, solE),
                             UserStatus = status
                         });
                     }
@@ -155,7 +156,7 @@ namespace ResourceDatabase
                         Operators.Add(new Operator()
                         {
                             Login = login,
-                            Password = Encryption.Encrypt(password, passwordE),
+                            Password = Encryption.Encrypt(password, passwordE, solE),
                             PeopleID = peopleID,
                             UserStatus = status
                         });
@@ -173,10 +174,12 @@ namespace ResourceDatabase
         {
             string key = Encryption.GetUniqueKey(8);
             string flag = Encryption.GetUniqueKey(16);
+            string sol = Encryption.GetUniqueKey(12);
             Admins.Add(new Admin() 
             {
                 Title = status,
                 Key = key,
+                Sol=sol,
                 Flag = flag
             });
             SaveChanges();
@@ -188,12 +191,13 @@ namespace ResourceDatabase
                 {
                     var pass = account[i].Passwords[i].Passwords;
                     var keyA = admin[i].Key;
+                    var solA = admin[i].Sol;
                     Password password = new Password()
                     {
                         PasswordID = account.Count() + 1,
                         AccountID = account[i].AccountID,
                         Flag = flag,
-                        Passwords = Encryption.Encrypt(Encryption.Decrypt(pass, keyA), key)
+                        Passwords = Encryption.Encrypt(Encryption.Decrypt(pass, keyA,solA), key,sol)
                     };
                     account[i].Passwords.Add(password) ;
                     Passwords.Add(password);
@@ -510,8 +514,9 @@ namespace ResourceDatabase
         {
             var flag = Admins.FirstOrDefault(a => a.Title == Operators.FirstOrDefault(c => c.OperatorID == id).UserStatus).Flag;
             var key = Admins.FirstOrDefault(a => a.Title == Operators.FirstOrDefault(c => c.OperatorID == id).UserStatus).Key;
+            var sol = Admins.FirstOrDefault(a => a.Title == Operators.FirstOrDefault(c => c.OperatorID == id).UserStatus).Sol;
             var p = Passwords.FirstOrDefault(i => i.Flag == flag).Passwords;
-            string d = Encryption.Decrypt(p,key);
+            string d = Encryption.Decrypt(p,key,sol);
             return d;
         }
         #endregion
@@ -678,7 +683,7 @@ namespace ResourceDatabase
             var item = Operators.FirstOrDefault(i=>i.Login == login);
             if (item != null)
             {
-                if (password == Encryption.Decrypt(item.Password, Encryption.DefaultKey()))
+                if (password == Encryption.Decrypt(item.Password, Encryption.DefaultKey(),Encryption.DefaultSol()))
                     {
                         id = item.OperatorID;
                     }

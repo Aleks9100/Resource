@@ -13,6 +13,7 @@ namespace ResourceDatabase
         internal static readonly char[] chars =
            "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890".ToCharArray();
         public static string DefaultKey() => "8aLqjJWM";
+        public static string DefaultSol() => "o95BJ1";
         public static string GetUniqueKey(int size)
         {
             byte[] data = new byte[4 * size];
@@ -31,9 +32,8 @@ namespace ResourceDatabase
 
             return result.ToString();
         }
-        public static string Encrypt(string ishText, string key)
+        public static string Encrypt(string ishText, string key,string sol)
         {
-            string sol = "6Q1uge8l";
             string cryptographicAlgorithm = "SHA1";
             int passIter = 2;
             string initVec = "a8doSuDitOz1hZe#";
@@ -71,9 +71,8 @@ namespace ResourceDatabase
             symmK.Clear();
             return Convert.ToBase64String(cipherTextBytes);
         }
-        public static string Decrypt(string ciphText, string key)
+        public static string Decrypt(string ciphText, string key, string sol)
         {
-            string sol = "6Q1uge8l";
             string cryptographicAlgorithm = "SHA1";
             int passIter = 2;
             string initVec = "a8doSuDitOz1hZe#";
